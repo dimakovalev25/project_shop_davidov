@@ -1,4 +1,4 @@
-@extends('master')
+@extends('layouts.master')
 
 @section('content')
     <div class="starter-template">
@@ -26,11 +26,11 @@
                             </a>
                         </td>
                         <td><span class="badge">{{ $product->pivot->count }}</span>
-                            <div class="btn-group">
+                            <div class="btn-group form-inline">
 
                                 <form method="POST" action="{{route('basket-add', $product)}}">
                                     @csrf
-                                    <button  class="btn btn-success">
+                                    <button class="btn btn-success">
                                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                     </button>
                                 </form>

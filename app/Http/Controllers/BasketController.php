@@ -17,9 +17,34 @@ class BasketController extends Controller
         return view('basket', compact('order'));
     }
 
+    public function orderApprove(Request $request)
+    {
+        $orderId = session('order_id');
+        if (is_null($orderId)) {
+            return redirect()->route('index');
+        }
+        $order = Order::find($orderId);
+        $success = $order->saveOrder($request->name, $request->phone);
+
+        if ($success){
+            session()->flash('success','order accepted for processing');
+        } else {
+            session()->flash('error','something went wrong');
+
+        }
+
+        return redirect()->route('index');
+
+    }
+
     public function order()
     {
-        return view('order');
+        $orderId = session('order_id');
+        if (is_null($orderId)) {
+            return redirect()->route('index');
+        }
+        $order = Order::find($orderId);
+        return view('order', compact('order'));
     }
 
     public function basketAdd($product_id)
@@ -49,9 +74,6 @@ class BasketController extends Controller
         $order_id = session('order_id');
         if (is_null($order_id)) {
             return redirect()->route('basket');
-
-//            $order = Order::find($order_id);
-//            return view('basket', compact('order'));
         }
         $order = Order::find($order_id);
 
@@ -65,11 +87,8 @@ class BasketController extends Controller
                 $pivotRow->update();
             }
         }
-//        $order->products()->detach($product_id);
-
-
         return redirect()->route('basket');
-//        return view('basket', compact('order'));
+
     }
 
 

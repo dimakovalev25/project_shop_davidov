@@ -1,12 +1,13 @@
-@extends('master')
+@extends('layouts.master')
 
 @section('content')
     <div class="starter-template">
         <h1>Approve order:</h1>
         <div class="container">
             <div class="row justify-content-center">
-                <p>Full price: <b>71990 руб.</b></p>
-                <form action="http://laravel-diplom-1.rdavydov.ru/basket/accept" method="POST">
+                <p>Full price: <b>{{ $order->getFullPrice() }}</b></p>
+                <form action="{{route('order-approve')}}" method="POST">
+                    @csrf
                     <div>
                         <div class="container">
                             <div class="form-group">
@@ -16,7 +17,6 @@
                                 </div>
                             </div>
                             <br>
-                            <br>
                             <div class="form-group">
                                 <label for="phone" class="control-label col-lg-offset-3 col-lg-2">Phone: </label>
                                 <div class="col-lg-4">
@@ -25,8 +25,8 @@
                             </div>
                         </div>
                         <br>
-                        <input type="hidden" name="_token" value="qhk4riitc1MAjlRcro8dvWchDTGkFDQ9Iacyyrkj">					<br>
-                        <input type="submit" class="btn btn-success" href="http://laravel-diplom-1.rdavydov.ru/basket/place" value="approve">
+                        {{--                        <input type="hidden" name="_token" value="qhk4riitc1MAjlRcro8dvWchDTGkFDQ9Iacyyrkj"> <br>--}}
+                        <input type="submit" class="btn btn-success" value="approve">
                     </div>
                 </form>
             </div>

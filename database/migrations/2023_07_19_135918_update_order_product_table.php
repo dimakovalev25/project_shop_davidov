@@ -10,7 +10,7 @@ return new class extends Migration {
     {
         Schema::table('order_product', function (Blueprint $table) {
 
-            $table->integer('count')->default(0);
+            $table->integer('count')->default(1);
 
         });
     }
