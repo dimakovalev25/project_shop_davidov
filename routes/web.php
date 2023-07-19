@@ -13,3 +13,4 @@ Route::get('/product/{product}', 'App\Http\Controllers\MainController@product')-
 Route::get('/basket','App\Http\Controllers\BasketController@basket')->name('basket');
 Route::get('/order','App\Http\Controllers\BasketController@order')->name('order');
 Route::post('/basket/add/{id}', 'App\Http\Controllers\BasketController@basketAdd')->name('basket-add');
+Route::post('/basket/remove/{id}', 'App\Http\Controllers\BasketController@basketRemove')->name('basket-remove');
