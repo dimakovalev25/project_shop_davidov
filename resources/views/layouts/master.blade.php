@@ -20,14 +20,33 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="{{route('index')}}">All goods</a></li>
-                <li><a href="{{route('categories')}}">Categories</a>
+                <li class="active">
+                    <a href="{{route('index')}}">All goods</a>
                 </li>
-                <li><a href="{{route('basket')}}">To basket</a></li>
+                <li>
+                    <a href="{{route('categories')}}">Categories</a>
+                </li>
+                <li>
+                    <a href="{{route('basket')}}">To basket</a>
+                </li>
+                @auth()
+                    <li><a href="{{route('home')}}">Main orders</a>
+                    </li>
+                @endauth
+
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{route('basket')}}">Admin panel</a></li>
+                @guest()
+                    <li><a href="{{route('login')}}">Login</a></li>
+                    <li><a href="{{route('register')}}">Register</a></li>
+                @endguest
+
+
+                @auth()
+                    <li><a href="{{route('basket')}}">Admin panel</a></li>
+                    <li><a href="{{route('get-logout')}}">Exit site</a></li>
+                @endauth
             </ul>
         </div>
     </div>

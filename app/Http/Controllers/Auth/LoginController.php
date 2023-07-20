@@ -11,8 +11,11 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected function redirectTo()
+    {
+        return route('home');
+    }
+//    protected $redirectTo = RouteServiceProvider::HOME;
 
     public function __construct()
     {
