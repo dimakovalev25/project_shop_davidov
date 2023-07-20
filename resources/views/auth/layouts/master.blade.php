@@ -32,9 +32,9 @@
 
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="http://laravel-diplom-1.rdavydov.ru/admin/categories">Category</a></li>
-                    <li><a href="http://laravel-diplom-1.rdavydov.ru/admin/products">Products</a></li>
-                    <li><a href="http://laravel-diplom-1.rdavydov.ru/admin/orders">Orders</a></li>
+                    <li><a href="{{route('categories.index')}}">Category</a></li>
+                    <li><a href="{{route('index')}}">Products</a></li>
+                    <li><a href="{{route('home')}}">Orders</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
@@ -54,8 +54,6 @@
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="card">
-                        <div class="card-header">@yield('title')</div>
-
                         <div class="card-body">
                             @yield('content')
                         </div>

@@ -24,7 +24,8 @@
                     <a href="{{route('index')}}">All goods</a>
                 </li>
                 <li>
-                    <a href="{{route('categories')}}">Categories</a>
+{{--                    <a href="{{route('categories.index ')}}">Categories</a>--}}
+{{--                    <a href="{{route('index ')}}">Categories</a>--}}
                 </li>
                 <li>
                     <a href="{{route('basket')}}">To basket</a>
