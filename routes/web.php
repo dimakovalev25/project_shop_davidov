@@ -15,3 +15,6 @@ Route::get('/order','App\Http\Controllers\BasketController@order')->name('order'
 Route::post('/order','App\Http\Controllers\BasketController@orderApprove')->name('order-approve');
 Route::post('/basket/add/{id}', 'App\Http\Controllers\BasketController@basketAdd')->name('basket-add');
 Route::post('/basket/remove/{id}', 'App\Http\Controllers\BasketController@basketRemove')->name('basket-remove');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

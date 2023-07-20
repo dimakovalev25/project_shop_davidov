@@ -20,10 +20,10 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li  class="active" ><a href="{{route('index')}}">All goods</a></li>
-                <li ><a href="{{route('categories')}}">Categories</a>
+                <li class="active"><a href="{{route('index')}}">All goods</a></li>
+                <li><a href="{{route('categories')}}">Categories</a>
                 </li>
-                <li ><a href="{{route('basket')}}">To basket</a></li>
+                <li><a href="{{route('basket')}}">To basket</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -35,10 +35,15 @@
 
 <div class="container">
     <div class="starter-template">
-        @if(session()->has('success'))
-        <p class="alert alert-success">{{session()->get('success')}}</p>
 
+        @if(session()->has('success'))
+            <p class="alert alert-success">{{session()->get('success')}}</p>
         @endif
+
+        @if(session()->has('warning'))
+            <p class="alert alert-warning">{{session()->get('warning')}}</p>
+        @endif
+
     </div>
     @yield('content')
 </div>
