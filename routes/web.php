@@ -24,8 +24,12 @@ Auth::routes([
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::group(['middleware' => 'is_admin'], function () {
         Route::get('/orders', 'App\Http\Controllers\OrderController@index')->name('home');
-
         Route::resource('/categories', 'App\Http\Controllers\Admin\CategoryController');
+        Route::resource('/products', 'App\Http\Controllers\Admin\ProductController');
     });
 });
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

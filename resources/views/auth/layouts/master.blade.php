@@ -33,7 +33,7 @@
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="{{route('categories.index')}}">Category</a></li>
-                    <li><a href="{{route('index')}}">Products</a></li>
+                    <li><a href="{{route('products.index')}}">Products</a></li>
                     <li><a href="{{route('home')}}">Orders</a></li>
                 </ul>
 
@@ -52,11 +52,13 @@
     <div class="py-4">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-body">
-                            @yield('content')
-                        </div>
+                @yield('content')
+
+{{--                <div class="col-md-8">--}}
+{{--                    <div class="card">--}}
+{{--                        <div class="card-body">--}}
+
+{{--                        </div>--}}
                     </div>
                 </div>
             </div>

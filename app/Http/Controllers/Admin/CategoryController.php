@@ -33,16 +33,18 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        //
+        return view('auth.categories.form', compact('category'));
     }
 
     public function update(Request $request, Category $category)
     {
-        //
+        $category->update($request->all());
+        return redirect()->route('categories.index');
     }
 
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('categories.index');
     }
 }

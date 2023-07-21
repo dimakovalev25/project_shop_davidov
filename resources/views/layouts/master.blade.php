@@ -24,8 +24,8 @@
                     <a href="{{route('index')}}">All goods</a>
                 </li>
                 <li>
-{{--                    <a href="{{route('categories.index ')}}">Categories</a>--}}
-{{--                    <a href="{{route('index ')}}">Categories</a>--}}
+                    {{--                    <a href="{{route('categories.index ')}}">Categories</a>--}}
+                    {{--                    <a href="{{route('index ')}}">Categories</a>--}}
                 </li>
                 <li>
                     <a href="{{route('basket')}}">To basket</a>
@@ -64,8 +64,11 @@
             <p class="alert alert-warning">{{session()->get('warning')}}</p>
         @endif
 
+        @yield('content')
     </div>
-    @yield('content')
 </div>
+
+
 </body>
+
 </html>
