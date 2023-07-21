@@ -26,9 +26,9 @@
                 <th>
                     Price
                 </th>
-                <th>
-                    Category
-                </th>
+{{--                <th>--}}
+{{--                    Category--}}
+{{--                </th>--}}
                 <th>
                     Image
                 </th>
@@ -44,8 +44,8 @@
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->description }}</td>
                     <td>{{ $product->price }}</td>
-                    <td>{{ $product->category }}</td>
-                    <td>{{ $product->image }}</td>
+{{--                    <td>{{ $product->category }}</td>--}}
+                    <td> <img src="{{ asset($product->image) }}" width= '60' height='60' class="img img-responsive" /></td>
                     <td>
                         <div class="btn-group" role="group">
                             <form action="{{ route('products.destroy', $product) }}" method="POST">
