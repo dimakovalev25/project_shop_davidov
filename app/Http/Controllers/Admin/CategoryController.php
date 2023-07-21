@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -24,9 +25,10 @@ class CategoryController extends Controller
         return view('auth.categories.form');
     }
 
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        $requestData = $request->all();
+        $requestData = $request->validated();
+//        $requestData = $request->all();
         $fileName = time().$request->file('image')->getClientOriginalName();
         $path = $request->file('image')->storeAs('images', $fileName, 'public');
         $requestData["image"] = '/storage/'.$path;
@@ -40,22 +42,6 @@ class CategoryController extends Controller
         Category::create($params);
         return redirect()->route('categories.index');*/
 
-
-
-  /*      if ($request->hasFile('image')) {
-            $data = $request->all();
-            $image = $request->image;
-            $Path = public_path('img');
-            $extension = $image->getClientOriginalExtension();
-            $fileName = Random::generate(7) . '.' . $extension;
-            $Img = Image::make($image->getRealPath())->fit(800, 400);
-            $Img->save($Path . '/' . $fileName, 50);
-            $data['image'] = $Img->basename;
-
-            Category::create($data);
-
-            return redirect()->route('categories.index');
-        }*/
 
     }
 
