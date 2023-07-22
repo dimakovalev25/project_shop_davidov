@@ -27,23 +27,36 @@
     <nav class="navbar navbar-default navbar-expand-md navbar-light navbar-laravel">
         <div class="container">
             <a class="navbar-brand" href="{{route('index')}}">
-                Return back site
+                Return back site!
             </a>
 
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="{{route('categories.index')}}">Category</a></li>
-                    <li><a href="{{route('products.index')}}">Products</a></li>
-                    <li><a href="{{route('home')}}">Orders</a></li>
+                    @guest()
+                        <li><a href="{{route('categories.index')}}">Category</a></li>
+                        <li><a href="{{route('products.index')}}">Products</a></li>
+                    @endguest
+
+                    @auth()
+                            @if(Auth::user()->isAdmin())
+                                <li><a href="{{route('home')}}">All orders</a></li>
+                            @else
+                                <li><a href="{{route('orders.index')}}">My Orders</a></li>
+                            @endif
+
+                    @endauth
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="nav-item">
+                    @auth()
+                        <li><a href="{{route('get-logout')}}">Exit site</a></li>
+                    @endauth
+{{--                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">Enter</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('register') }}">Register</a>
-                    </li>
+                    </li>--}}
                 </ul>
             </div>
         </div>
@@ -53,17 +66,11 @@
         <div class="container">
             <div class="row justify-content-center">
                 @yield('content')
-
-{{--                <div class="col-md-8">--}}
-{{--                    <div class="card">--}}
-{{--                        <div class="card-body">--}}
-
-{{--                        </div>--}}
-                    </div>
-                </div>
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>
 </body>
 </html>

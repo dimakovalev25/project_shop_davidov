@@ -21,9 +21,17 @@ Auth::routes([
     'verify' => false,
 ]);
 
+Route::group(['middleware' => 'auth', 'prefix' => 'person'], function () {
+    Route::get('/orders', 'App\Http\Controllers\Person\OrderController@index')->name('orders.index');
+    Route::get('/orders/{order}', 'App\Http\Controllers\Person\OrderController@show')->name('orders.show');
+
+
+});
+
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::group(['middleware' => 'is_admin'], function () {
         Route::get('/orders', 'App\Http\Controllers\OrderController@index')->name('home');
+        Route::get('/orders/{order}', 'App\Http\Controllers\OrderController@show')->name('show-order');
         Route::resource('/categories', 'App\Http\Controllers\Admin\CategoryController');
         Route::resource('/products', 'App\Http\Controllers\Admin\ProductController');
     });

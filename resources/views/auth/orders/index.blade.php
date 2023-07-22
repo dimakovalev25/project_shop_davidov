@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="col-md-12">
-        <h1>Orders</h1>
+        <h1>Orders!!!</h1>
         <table class="table">
             <tbody>
             <tr>
@@ -34,8 +34,14 @@
                     <td>{{ $order->getFullPrice() }} $</td>
                     <td>
                         <div class="btn-group" role="group">
+
+
                             <a class="btn btn-success" type="button"
-                               href="#">Open</a>
+                               @if(Auth::user()->isAdmin())
+                                   href="{{ route('show-order', $order) }}
+                                   @else
+                                     href="{{ route('orders.show', $order) }}
+                                @endif">Open</a>
                         </div>
                     </td>
                 </tr>

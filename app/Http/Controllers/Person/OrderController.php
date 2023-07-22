@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Person;
 
+use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     public function index()
     {
-        $orders = Order::where('status', 1)->get();
+        $orders = Auth::user()->orders()->where('status', 1)->get();
+//        dd($orders);
         return view('auth.orders.index', compact('orders'));
     }
 
@@ -21,5 +20,4 @@ class OrderController extends Controller
     {
         return view('auth.orders.show', compact('order'));
     }
-
 }

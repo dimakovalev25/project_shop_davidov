@@ -16,4 +16,6 @@ class HomeController extends Controller
         $orders = Order::where('status', 1)->get();
         return view('auth.orders.index', compact('orders'));
     }
+
+
 }

@@ -1,6 +1,13 @@
 @extends('layouts.master')
 
 @section('content')
+    @if(is_null($order))
+        <div class="starter-template">
+            <h1>there are no items in the cart</h1>
+            <a href="{{route('index')}}">to products</a>
+            </div>
+
+    @else
     <div class="starter-template">
         <h1>Basket</h1>
         <p>order</p>
@@ -21,7 +28,8 @@
                         <td>
                             <a href="http://laravel-diplom-1.rdavydov.ru/mobiles/iphone_x_64">
                                 <img height="56px"
-                                     src="http://laravel-diplom-1.rdavydov.ru/storage/products/iphone_x.jpg">
+                                     src="{{ asset($product->image) }}" width= '60' height='60' class="img img-responsive"
+
                                 {{ $product->name }}
                             </a>
                         </td>
@@ -62,4 +70,7 @@
             </div>
         </div>
     </div>
+
+
+    @endif
 @endsection

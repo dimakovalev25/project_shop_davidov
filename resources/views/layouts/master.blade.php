@@ -20,21 +20,15 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active">
+                <li @routeactive('index')>
                     <a href="{{route('index')}}">All goods</a>
                 </li>
-                <li>
-                    {{--                    <a href="{{route('categories.index ')}}">Categories</a>--}}
-                    {{--                    <a href="{{route('index ')}}">Categories</a>--}}
+                <li @routeactive('categories')>
+                    <a href="{{route('categories' )}}">Categories</a>
                 </li>
-                <li>
+                <li @routeactive('basket')>
                     <a href="{{route('basket')}}">To basket</a>
                 </li>
-                @auth()
-                    <li><a href="{{route('home')}}">Main orders</a>
-                    </li>
-                @endauth
-
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -45,7 +39,11 @@
 
 
                 @auth()
-                    <li><a href="{{route('basket')}}">Admin panel</a></li>
+                    @if(Auth::user()->isAdmin())
+                        <li><a href="/admin/categories">Admin panel</a></li>
+                    @else
+                        <li><a href="{{route('orders.index')}}">My Orders</a></li>
+                    @endif
                     <li><a href="{{route('get-logout')}}">Exit site</a></li>
                 @endauth
             </ul>
