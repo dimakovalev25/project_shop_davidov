@@ -24,6 +24,9 @@
                     <a href="{{route('index')}}">All goods</a>
                 </li>
                 <li @routeactive('categories')>
+                    <a href="/admin/products">Products</a>
+                </li>
+                <li @routeactive('products')>
                     <a href="{{route('categories' )}}">Categories</a>
                 </li>
                 <li @routeactive('basket')>

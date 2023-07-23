@@ -28,9 +28,15 @@
             <form method="POST" action="{{route('basket-add', $product)}}">
                 @csrf
                 <p>
-                    <button type="submit" class="btn btn-primary"
-                            role="button">add to basket
-                    </button>
+
+                    @if($product->isAvailable())
+                        <button type="submit" class="btn btn-primary"
+                                role="button">add to basket
+                        </button>
+                    @else
+                        <span class="warning">item is out of stock</span>
+
+                    @endif
                 </p>
             </form>
         </div>

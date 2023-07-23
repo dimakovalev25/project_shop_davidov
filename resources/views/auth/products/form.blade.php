@@ -52,11 +52,21 @@
 
                 <div class="input-group row">
                     <div>
-                        <label for="description" class="col-sm-2 col-form-label">Price: </label>
+                        <label for="price" class="col-sm-2 col-form-label">Price: </label>
                     </div>
                     <div class="col-sm-6">
                         <input type="number" class="form-control" name="price" id="price"
                                value="@isset($product){{ $product->price }}@endisset">
+                    </div>
+                </div>
+
+                <div class="input-group row">
+                    <div>
+                        <label for="count" class="col-sm-2 col-form-label">Count: </label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="number" class="form-control" name="count" id="count"
+                               value="@isset($product){{ $product->count }}@endisset">
                     </div>
                 </div>
 
@@ -110,18 +120,7 @@
                         </label>
                     </div>
                     <br>
-
-                    {{--                    <div class="form-group row">
-                                            <label for="code" class="col-sm-2 col-form-label">{{$title}}: </label>
-                                            <div class="col-sm-6">
-                                                <input type="checkbox" class="form-control" name="{{$field}}" id="{{$field}}"
-                                                       value="@isset($product){{ $product->field }}@endisset">
-                                            </div>
-                                        </div>
-                                        <br>--}}
                 @endforeach
-
-
                 <button class="btn btn-success">Save</button>
             </div>
         </form>

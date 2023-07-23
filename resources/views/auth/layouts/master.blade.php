@@ -40,6 +40,12 @@
                     @auth()
                             @if(Auth::user()->isAdmin())
                                 <li><a href="{{route('home')}}">All orders</a></li>
+                                <li >
+                                    <a href="/admin/products">Products</a>
+                                </li>
+                                <li>
+                                    <a href="/admin/categories">Categories</a>
+                                </li>
                             @else
                                 <li><a href="{{route('orders.index')}}">My Orders</a></li>
                             @endif
