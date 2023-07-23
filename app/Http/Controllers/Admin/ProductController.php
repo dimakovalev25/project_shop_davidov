@@ -22,11 +22,15 @@ class ProductController extends Controller
     }
     public function store(Request $request)
     {
-/*        $path = $request->file('image')->store('products');
-        $params = $request->all();
-        $params['image'] = $path;*/
 
         $requestData = $request->all();
+        foreach (['new', 'hit', 'recommend'] as $fieldName) {
+            if(isset($requestData[$fieldName])){
+                $requestData[$fieldName] = 1;
+            }
+        }
+//        dd($requestData);
+
         $fileName = time().$request->file('image')->getClientOriginalName();
         $path = $request->file('image')->storeAs('images', $fileName, 'public');
         $requestData["image"] = '/storage/'.$path;
@@ -46,6 +50,11 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $product->update($request->all());
+        foreach (['new', 'hit', 'recommend'] as $fieldName) {
+            if(isset($requestData[$fieldName])){
+                $requestData[$fieldName] = 1;
+            }
+        }
         return redirect()->route('products.index');
     }
     public function destroy(Product $product)

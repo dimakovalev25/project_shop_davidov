@@ -4,31 +4,46 @@
     <div class="container">
         <div class="starter-template">
             <h1>All goods</h1>
-
+            <form method="GET" action="{{route("index")}}">
+                <div class="filters row">
+                    <div class="col-sm-6 col-md-3">
+                        <label for="price_from">Price for
+                            <input type="text" name="price_from" id="price_from" size="6" value="{{ request()->price_from}}">
+                        </label>
+                        <label for="price_to">to
+                            <input type="text" name="price_to" id="price_to" size="6"  value="{{ request()->price_to }}">
+                        </label>
+                    </div>
+                    <div class="col-sm-2 col-md-2">
+                        <label for="hit">
+                            <input type="checkbox" name="hit" id="hit" @if(request()->has('hit')) checked @endif> Hit
+                        </label>
+                    </div>
+                    <div class="col-sm-2 col-md-2">
+                        <label for="new">
+                            <input type="checkbox" name="new" id="new" @if(request()->has('new')) checked @endif> New product
+                        </label>
+                    </div>
+                    <div class="col-sm-2 col-md-2">
+                        <label for="recommend">
+                            <input type="checkbox" name="recommend" id="recommend" @if(request()->has('recommend')) checked @endif> Reccomend
+                        </label>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                        <a href="{{ route("index") }}" class="btn btn-warning">Reset filter</a>
+                    </div>
+                </div>
+            </form>
+            <br>
+            <br>
             <div class="row">
                 @foreach($products as $product)
                     @include('layouts.card', compact('product'))
                 @endforeach
 
-                {{--                <div class="col-sm-6 col-md-4">
-                                    <div class="thumbnail">
-                                        <img src="https://th.bing.com/th/id/OIP.nP5Di8STBfYAQZW4AIDEzQHaNt?w=115&h=189&c=7&r=0&o=5&dpr=1.3&pid=1.7"
-                                             alt="iPhone X 64GB">
-                                        <div class="caption">
-                                            <h3>iPhone X 64GB</h3>
-                                            <p>71990 руб.</p>
-                                            <p>
-                                                <a href="{{route('basket')}}" class="btn btn-primary"
-                                                   role="button">to basket</a>
-                                                <a href="{{route('basket')}}"
-                                                   class="btn btn-default"
-                                                   role="button">...</a>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>--}}
-
             </div>
         </div>
     </div>
+    {{$products->links('pagination::bootstrap-4')}}
 @endsection

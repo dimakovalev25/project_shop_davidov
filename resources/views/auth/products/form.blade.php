@@ -65,6 +65,7 @@
                     <div>
                         <label for="description" class="col-sm-2 col-form-label">Category: </label>
                     </div>
+                    <br>
                     <div class="col-sm-6">
                         <select name="category_id" id="category_id" class="form-control">
                             @foreach($categories as $category )
@@ -91,6 +92,36 @@
                     </div>
                 </div>
                 <br>
+                @foreach([
+                    'hit' => 'Bestseller',
+                    'new' => 'New Product',
+                    'recommend' => 'Recommend',
+                    ] as $field => $title)
+
+                    <div class="form-check">
+                        <input class="form-check-input" name="{{$field}}" id="{{$field}}" type="checkbox"
+                               id="flexCheckChecked"
+                               @if  ( isset($product) && $product->$field === 1)
+                                   checked="checked"
+                                @endif
+                        >
+                        <label class="form-check-label" for="flexCheckChecked">
+                            {{$title}}:
+                        </label>
+                    </div>
+                    <br>
+
+                    {{--                    <div class="form-group row">
+                                            <label for="code" class="col-sm-2 col-form-label">{{$title}}: </label>
+                                            <div class="col-sm-6">
+                                                <input type="checkbox" class="form-control" name="{{$field}}" id="{{$field}}"
+                                                       value="@isset($product){{ $product->field }}@endisset">
+                                            </div>
+                                        </div>
+                                        <br>--}}
+                @endforeach
+
+
                 <button class="btn btn-success">Save</button>
             </div>
         </form>

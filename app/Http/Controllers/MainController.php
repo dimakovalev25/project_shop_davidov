@@ -9,10 +9,28 @@ use Illuminate\Http\Request;
 class MainController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::all();
-//        dd($products);
+        $productsQuery = Product::query();
+
+        if ($request->filled('price_from')) {
+            $productsQuery->where('price', '>=', $request->price_from);
+        }
+
+        if ($request->filled('price_to')) {
+            $productsQuery->where('price', '<=', $request->price_to);
+        }
+
+        foreach (['hit', 'new', 'recommend'] as $field){
+            if ($request->has($field)) {
+                $productsQuery->where($field,1);
+            }
+        }
+
+
+
+        $products = $productsQuery->paginate(6);
+//        dd($productsQuery);
         return view('index', compact('products'));
     }
 

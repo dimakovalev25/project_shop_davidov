@@ -41,7 +41,7 @@
                                    href="{{ route('show-order', $order) }}
                                    @else
                                      href="{{ route('orders.show', $order) }}
-                                @endif">Open</a>
+                            @endif">Open</a>
                         </div>
                     </td>
                 </tr>
