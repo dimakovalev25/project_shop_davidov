@@ -15,8 +15,8 @@ Route::get('/basket', 'App\Http\Controllers\BasketController@basket')->name('bas
 
 Route::get('/order', 'App\Http\Controllers\BasketController@order')->name('order');
 Route::post('/order', 'App\Http\Controllers\BasketController@orderApprove')->name('order-approve');
-Route::post('/basket/remove/{id}', 'App\Http\Controllers\BasketController@basketRemove')->name('basket-remove');
-Route::post('/basket/add/{id}', 'App\Http\Controllers\BasketController@basketAdd')->name('basket-add');
+Route::post('/basket/remove/{product}', 'App\Http\Controllers\BasketController@basketRemove')->name('basket-remove');
+Route::post('/basket/add/{product}', 'App\Http\Controllers\BasketController@basketAdd')->name('basket-add');
 Route::get('/logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('get-logout');
 
 Auth::routes([
