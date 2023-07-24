@@ -12,14 +12,12 @@ class BasketController extends Controller
 {
     public function basket()
     {
-
-/*        $order_id = session('order_id');
+        $order_id = session('order_id');
         if (!is_null($order_id)) {
-            $order = Order::findOrFail($order_id);
+            $order = Order::find($order_id);
         }
-        $order = Order::findOrFail($order_id);*/
-
-        $order = (new Basket())->getOrder();
+        $order = Order::find($order_id);
+//        $order = (new Basket())->getOrder();
         return view('basket', compact('order'));
     }
 
@@ -29,7 +27,7 @@ class BasketController extends Controller
         if (is_null($orderId)) {
             return redirect()->route('index');
         }
-        $order = Order::findOrFail($orderId);
+        $order = Order::find($orderId);
         $success = $order->saveOrder($request->name, $request->phone);
 
         if ($success) {
@@ -49,7 +47,7 @@ class BasketController extends Controller
         if (is_null($orderId)) {
             return redirect()->route('index');
         }
-        $order = Order::findOrFail($orderId);
+        $order = Order::find($orderId);
         return view('order', compact('order'));
     }
 
@@ -82,13 +80,16 @@ class BasketController extends Controller
 
     public function basketAdd($product_id)
     {
+
         $order_id = session('order_id');
-        $order = Order::findOrFail($order_id);
+
+        $order = Order::find($order_id);
         if (is_null($order_id)) {
             $order_id = Order::create()->id;
             session(['order_id' => $order_id]);
+//            dd($order);
         } else {
-            $order = Order::findOrFail($order_id);
+            $order = Order::find($order_id);
         }
 
         if ($order->products->contains($product_id)) {
@@ -106,7 +107,7 @@ class BasketController extends Controller
         }
 
 
-        $product = Product::findOrFail($product_id);
+        $product = Product::find($product_id);
         session()->flash('success', 'add product'. ' '.  $product->name );
 
 
@@ -120,7 +121,7 @@ class BasketController extends Controller
         if (is_null($order_id)) {
             return redirect()->route('basket');
         }
-        $order = Order::findOrFail($order_id);
+        $order = Order::find($order_id);
 
         if ($order->products->contains($product_id)) {
             $pivotRow = $order->products()->where('product_id', $product_id)->first()->pivot;
@@ -133,7 +134,7 @@ class BasketController extends Controller
             }
         }
 
-        $product = Product::findOrFail($product_id);
+        $product = Product::find($product_id);
 
         session()->flash('warning', 'delete product' . ' ' . $product->name);
 
