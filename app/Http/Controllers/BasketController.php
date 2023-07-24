@@ -18,18 +18,11 @@ class BasketController extends Controller
 
     public function orderApprove(Request $request)
     {
-        $orderId = session('order_id');
-        if (is_null($orderId)) {
-            return redirect()->route('index');
-        }
-        $order = Order::find($orderId);
-        $success = $order->saveOrder($request->name, $request->phone);
 
-        if ($success) {
+        if ((new Basket())->saveOrder($request->name, $request->phone)){
             session()->flash('success', 'order accepted for processing');
         } else {
-            session()->flash('error', 'something went wrong');
-
+            session()->flash('error', 'something went wrong, try later');
         }
 
         return redirect()->route('index');
@@ -38,21 +31,29 @@ class BasketController extends Controller
 
     public function order()
     {
-        $orderId = session('order_id');
-        if (is_null($orderId)) {
-            return redirect()->route('index');
+        $basket = new Basket();
+        $order = $basket->getOrder();
+
+        if (!$basket->countAvailable()){
+            session()->flash('warning', 'product not available for order in full');
+            return redirect()->route('basket');
         }
-        $order = Order::findOrFail($orderId);
+
         return view('order', compact('order'));
     }
 
     public function basketAdd(Product $product)
     {
-        (new Basket(true))->addProduct($product);
+        $result = (new Basket(true))->addProduct($product);
 
-        session()->flash('success', 'add product' . ' ' . $product->name);
+        if ($result) {
+            session()->flash('success', 'add product' . ' ' . $product->name);
+        } else {
+            session()->flash('warning', 'product' . ' ' . $product->name. ''. 'not available for order');
+        }
 
         return redirect()->route('basket');
+
 
     }
 
