@@ -26,8 +26,16 @@
                 <td>{{ $category->name }}</td>
             </tr>
             <tr>
+                <td>Name_RU</td>
+                <td>{{ $category->name_ru }}</td>
+            </tr>
+            <tr>
                 <td>Description</td>
                 <td>{{ $category->description }}</td>
+            </tr>
+            <tr>
+                <td>Description_RU</td>
+                <td>{{ $category->description_ru }}</td>
             </tr>
             <tr>
                 <td>Image</td>

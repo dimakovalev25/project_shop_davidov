@@ -25,6 +25,10 @@
                 <td>Name</td>
                 <td>{{ $product->name }}</td>
             </tr>
+            <tr>
+                <td>Name_RU</td>
+                <td>{{ $product->name_ru }}</td>
+            </tr>
              <tr>
                 <td>Price</td>
                 <td>{{ $product->price }}</td>
@@ -36,6 +40,10 @@
             <tr>
                 <td>Description</td>
                 <td>{{ $product->description }}</td>
+            </tr>
+            <tr>
+                <td>Description_RU</td>
+                <td>{{ $product->description_ru }}</td>
             </tr>
             <tr>
                 <td>Image</td>

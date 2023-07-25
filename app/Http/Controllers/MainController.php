@@ -49,8 +49,7 @@ class MainController extends Controller
         }
 
 
-        $products = $productsQuery->paginate(3)->withPath($request->getQueryString());
-//        dd($productsQuery);
+        $products = $productsQuery->paginate(19)->withPath($request->getQueryString());
         return view('index', compact('products'));
     }
 

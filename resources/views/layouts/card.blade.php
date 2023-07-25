@@ -15,9 +15,10 @@
 
 
         <img src="{{ asset($product->image) }}" width='60' height='60' class="img img-responsive"
-             alt="{{$product->name}}">
+             alt="{{$product->__('name')}}">
         <div class="caption">
-            <h3>{{$product->name}}</h3>
+            <h3>{{$product->__('name')}}</h3>
+            <h3>{{$product->__('description')}}</h3>
             <p>{{$product->price}} $</p>
             {{--            {{$product->category->name}}--}}
             <p>

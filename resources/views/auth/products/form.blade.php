@@ -37,6 +37,14 @@
                     </div>
                 </div>
                 <br>
+                    <div class="input-group row">
+                    <label for="name_ru" class="col-sm-2 col-form-label">Name_RU: </label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="name_ru" id="name_ru"
+                               value="@isset($product){{ $product->name_ru }}@endisset">
+                    </div>
+                </div>
+                <br>
 
                 <div class="input-group row">
                     <div>
@@ -49,6 +57,19 @@
                                 @endisset</textarea>
                     </div>
                 </div>
+                    <br>
+                    <div class="input-group row">
+                        <div>
+                            <label for="description_ru" class="col-sm-2 col-form-label">Description_RU: </label>
+                        </div>
+                        <div class="col-sm-6">
+							<textarea name="description_ru" id="description_ru" cols="72"
+                                      rows="7">@isset($product)
+                                    {{ $product->description_ru }}
+                                @endisset</textarea>
+                        </div>
+                    </div>
+
 
                 <div class="input-group row">
                     <div>

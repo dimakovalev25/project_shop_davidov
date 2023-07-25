@@ -44,6 +44,18 @@
                     </div>
                 </div>
                 <br>
+                    <div class="input-group row">
+                        <label for="name_ru" class="col-sm-2 col-form-label">Name_RU: </label>
+                        <div class="col-sm-6">
+
+                            <input type="text" class="form-control" name="name_ru" id="name_ru"
+                                   value=" {{old('name')}} @isset($category){{ $category->name }}@endisset">
+                            @error('name')
+                            <div class="alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <br>
                 <div class="input-group row">
                     <div>
                     <label for="description" class="col-sm-2 col-form-label">Description: </label>
@@ -58,6 +70,21 @@
                         @enderror
                     </div>
                 </div>
+
+                    <div class="input-group row">
+                        <div>
+                            <label for="description_ru" class="col-sm-2 col-form-label">Description_RU: </label>
+
+                        </div>
+                        <div class="col-sm-6">
+
+							<textarea name="description_ru" id="description_ru" cols="72"
+                                      rows="7">@isset($category){{ $category->description }}@endisset</textarea>
+                            @error('description')
+                            <div class="alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
                 <br>
                 <div class="input-group row">
                     <label for="image" class="col-sm-2 col-form-label">Image: </label>
