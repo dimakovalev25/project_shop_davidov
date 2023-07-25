@@ -18,8 +18,9 @@ class BasketController extends Controller
 
     public function orderApprove(Request $request)
     {
+        $email = Auth::check() ? Auth::user()->email : $request->email;
 
-        if ((new Basket())->saveOrder($request->name, $request->phone)){
+        if ((new Basket())->saveOrder($request->name, $request->phone, $email)){
             session()->flash('success', 'order accepted for processing');
         } else {
             session()->flash('error', 'something went wrong, try later');

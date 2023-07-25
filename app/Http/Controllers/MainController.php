@@ -50,7 +50,7 @@ class MainController extends Controller
 
     public function product($product_id)
     {
-        $product = Product::where('id', $product_id)->first();;
+        $product = Product::where('id', $product_id)->firstOrFail();;
         return view('product', compact('product'));
     }
 
