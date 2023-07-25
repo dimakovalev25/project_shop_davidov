@@ -8,6 +8,10 @@ Route::get('/categories/{category}', 'App\Http\Controllers\MainController@catego
 Route::get('/categories', 'App\Http\Controllers\MainController@categories')->name('categories');
 Route::get('/product/{product}', 'App\Http\Controllers\MainController@product')->name('product');
 
+Route::post('/subscription/{product}', 'App\Http\Controllers\MainController@subscribe')->name('subscription');
+
+
+
 Route::group(['middleware' => 'basket_not_empty'], function () {
 Route::get('/basket', 'App\Http\Controllers\BasketController@basket')->name('basket');
 
@@ -31,6 +35,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'person'], function () {
 
 
 });
+
+
+
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::group(['middleware' => 'is_admin'], function () {

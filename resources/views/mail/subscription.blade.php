@@ -1,0 +1,1 @@
+dear customer, good appeared in our stock
