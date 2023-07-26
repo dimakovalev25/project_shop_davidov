@@ -55,14 +55,14 @@
 
                                 </div>
                             </td>
-                            <td>{{  $product->price }} $</td>
-                            <td>{{ $product->getPriceForCount() }} $</td>
+                            <td>{{  $product->price }} {{App\Services\CurrencyConversion::getCurrencySymbol()}}</td>
+                            <td>{{ $product->getPriceForCount() }} {{App\Services\CurrencyConversion::getCurrencySymbol()}}</td>
                         </tr>
                     @endforeach
 
                     <tr>
                         <td colspan="4"><h3> Full price:</h3></td>
-                        <td>{{$order->getFullPrice()}} $ </td>
+                        <td>{{$order->getFullPrice()}} {{App\Services\CurrencyConversion::getCurrencySymbol()}} </td>
                     </tr>
                     </tbody>
                 </table>
