@@ -12,6 +12,7 @@ Route::middleware(['set_locale'])->group(function () {
     Route::post('/subscription/{product}', 'App\Http\Controllers\MainController@subscribe')->name('subscription');
 
     Route::get('locale/{locale}', 'App\Http\Controllers\MainController@changeLocale')->name('locale');
+    Route::get('currency/{currency}', 'App\Http\Controllers\MainController@changeCurrency')->name('currency');
 
 
     Route::group(['middleware' => 'basket_not_empty'], function () {

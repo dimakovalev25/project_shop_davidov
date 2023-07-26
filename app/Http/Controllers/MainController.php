@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductsFilterRequest;
 use App\Models\Category;
+use App\Models\Currency;
 use App\Models\Models\Subscription;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -12,11 +13,32 @@ use Illuminate\Support\Facades\App;
 class MainController extends Controller
 {
 
+    /*    public function changeLocale($locale)
+        {
+            session(['locale' => $locale]);
+            App::setLocale($locale);
+            return redirect()->back();
+        }*/
+
     public function changeLocale($locale)
     {
+        $availableLocales = ['ru', 'en'];
+        if (!in_array($locale, $availableLocales)) {
+            $locale = config('app.locale');
+        }
         session(['locale' => $locale]);
         App::setLocale($locale);
         return redirect()->back();
+    }
+
+
+    public function changeCurrency($currencyCode)
+    {
+        $currency = Currency::byCode($currencyCode)->first();
+//        dd($currency);
+        session(['currency'=> $currency->code]);
+        return redirect()->back();
+//        dd($currencyCode);
     }
 
     public function subscribe(Request $request, Product $product)
@@ -50,7 +72,8 @@ class MainController extends Controller
 
 
         $products = $productsQuery->paginate(19)->withPath($request->getQueryString());
-        return view('index', compact('products'));
+        $currencies = Currency::all();
+        return view('index', compact('products', 'currencies'));
     }
 
     public function category(Category $category)

@@ -12,6 +12,14 @@ class CurrencySeeder extends Seeder
     {
         DB::table('currencies')->truncate();
         DB::table('currencies')->insert([
+
+            [
+                'code'=>'BY',
+                'symbol' => 'Br',
+                'is_main' => 1,
+                'rate' => 1
+
+            ],
             [
                 'code'=>'USD',
                 'symbol' => '$',
@@ -25,14 +33,7 @@ class CurrencySeeder extends Seeder
                 'is_main' => 0,
                 'rate' => 0.36
 
-            ],
-            [
-                'code'=>'BY',
-                'symbol' => 'Br',
-                'is_main' => 1,
-                'rate' => 1
-
-            ],
+            ]
         ]);
     }
 }
