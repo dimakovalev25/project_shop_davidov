@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use App\Models\Traits\Translatable;
+use App\Services\CurrencyConversion;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
@@ -55,4 +57,15 @@ class Product extends Model
     {
         return $this->recommend === 1;
     }
+
+
+    public function getPriceAttribute($value)
+    {
+        return round(CurrencyConversion::convert($value), 2);
+    }
+
+/*    public function getCurrencyAttribute()
+    {
+        return session('currency', 'BY');
+    }*/
 }

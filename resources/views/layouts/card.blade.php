@@ -19,7 +19,7 @@
         <div class="caption">
             <h3>{{$product->__('name')}}</h3>
             <h3>{{$product->__('description')}}</h3>
-            <p>{{$product->price}} $</p>
+            <p>{{$product->price}} {{App\Services\CurrencyConversion::getCurrencySymbol()}} </p>
             {{--            {{$product->category->name}}--}}
             <p>
                 <a href="{{route('product', compact('product'))}}" class="btn btn-primary"

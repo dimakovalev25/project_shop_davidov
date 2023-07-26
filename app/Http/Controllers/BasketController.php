@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classes\Basket;
+use App\Models\Currency;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -12,8 +13,9 @@ class BasketController extends Controller
 {
     public function basket()
     {
+        $currencies = Currency::all();
         $order = (new Basket())->getOrder();
-        return view('basket', compact('order'));
+        return view('basket', compact('order', 'currencies'));
     }
 
     public function orderApprove(Request $request)
