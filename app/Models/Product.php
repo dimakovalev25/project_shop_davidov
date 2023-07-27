@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Filterable;
 use App\Models\Traits\Translatable;
 use App\Services\CurrencyConversion;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,7 +15,7 @@ class Product extends Model
     use HasFactory;
     use SoftDeletes;
     use Translatable;
-
+    use Filterable;
 
 
     protected $fillable = ['code', 'name', 'description', 'image', 'price', 'category_id', 'new', 'hit', 'recommend',

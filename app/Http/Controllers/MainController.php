@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Filters\ProductFilter;
+use App\Http\Requests\FilterRequest;
 use App\Http\Requests\ProductsFilterRequest;
 use App\Models\Category;
 use App\Models\Currency;
@@ -13,46 +15,19 @@ use Illuminate\Support\Facades\App;
 class MainController extends Controller
 {
 
-    /*    public function changeLocale($locale)
-        {
-            session(['locale' => $locale]);
-            App::setLocale($locale);
-            return redirect()->back();
-        }*/
-
-    public function changeLocale($locale)
+    public function index(FilterRequest $request)
     {
-        $availableLocales = ['ru', 'en'];
-        if (!in_array($locale, $availableLocales)) {
-            $locale = config('app.locale');
-        }
-        session(['locale' => $locale]);
-        App::setLocale($locale);
-        return redirect()->back();
+        $data = $request->validated();
+
+        $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($data)]);
+        $products = Product::filter($filter)->get();
+        $currencies = Currency::all();
+        return view('index', compact('products', 'currencies'));
     }
 
-
-    public function changeCurrency($currencyCode)
-    {
-        $currency = Currency::byCode($currencyCode)->first();
-//        dd($currency);
-        session(['currency'=> $currency->code]);
-        return redirect()->back();
-//        dd($currencyCode);
-    }
-
-    public function subscribe(Request $request, Product $product)
+/*    public function index(ProductsFilterRequest $request)
     {
 
-        Subscription::create([
-            'email' => $request->email,
-            'product_id' => $product->id
-        ]);
-        return redirect()->back()->with('success', 'upon receipt of the goods we will contact you');
-    }
-
-    public function index(ProductsFilterRequest $request)
-    {
         $productsQuery = Product::query();
 //        $productsQuery = Product::with('category');
 
@@ -71,27 +46,62 @@ class MainController extends Controller
         }
 
 
-        $products = $productsQuery->paginate(19)->withPath($request->getQueryString());
+        $products = $productsQuery->paginate(6)->withPath($request->getQueryString());
+//        $products = $productsQuery->all()->withPath($request->getQueryString());
         $currencies = Currency::all();
         return view('index', compact('products', 'currencies'));
+    }*/
+
+    public function changeLocale($locale)
+    {
+        $availableLocales = ['ru', 'en'];
+        if (!in_array($locale, $availableLocales)) {
+            $locale = config('app.locale');
+        }
+        session(['locale' => $locale]);
+        App::setLocale($locale);
+        return redirect()->back();
+    }
+
+
+    public function changeCurrency($currencyCode)
+    {
+        $currency = Currency::byCode($currencyCode)->first();
+//        dd($currency);
+        session(['currency' => $currency->code]);
+        return redirect()->back();
+//        dd($currencyCode);
+    }
+
+    public function subscribe(Request $request, Product $product)
+    {
+
+        Subscription::create([
+            'email' => $request->email,
+            'product_id' => $product->id
+        ]);
+        return redirect()->back()->with('success', 'upon receipt of the goods we will contact you');
     }
 
     public function category(Category $category)
     {
+        $currencies = Currency::all();
 //        $category = Category::where('code', $category->code)->first();
-        return view('category', compact('category'));
+        return view('category', compact('category', 'currencies'));
     }
 
     public function categories()
     {
+        $currencies = Currency::all();
         $categories = Category::all();
-        return view('categories', compact('categories'));
+        return view('categories', compact('categories', 'currencies'));
     }
 
     public function product($product_id)
     {
+        $currencies = Currency::all();
         $product = Product::where('id', $product_id)->firstOrFail();;
-        return view('product', compact('product'));
+        return view('product', compact('product', 'currencies'));
     }
 
 
