@@ -51,8 +51,8 @@
         </div>
     </div>
     <div>
-        {{--    {{$products->links('pagination::bootstrap-4')}}--}}
-{{--            {{$products->links()}}--}}
+        {{$products->links()}}
     </div>
+    {{--    {{$products->links('pagination::bootstrap-4')}}--}}
     {{--    {{$products->onEachSide(3)->links()}}--}}
 @endsection
