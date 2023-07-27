@@ -18,3 +18,19 @@ div.thumbnail img {
 div.form-inline form{
     display: inline;
 }
+
+.main_filters{
+    display: flex;
+
+}
+.main_filters_price{
+    display: flex;
+    width: 30%;
+
+}
+
+.main_filters_categories{
+    display: flex;
+    width: 30%;
+
+}

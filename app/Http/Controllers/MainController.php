@@ -18,39 +18,39 @@ class MainController extends Controller
     public function index(FilterRequest $request)
     {
         $data = $request->validated();
-
         $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($data)]);
         $products = Product::filter($filter)->paginate(9)->withQueryString();;
         $currencies = Currency::all();
-        return view('index', compact('products', 'currencies'));
+        $categories = Category::all();
+        return view('index', compact('products', 'currencies', 'categories'));
     }
 
-/*    public function index(ProductsFilterRequest $request)
-    {
+    /*    public function index(ProductsFilterRequest $request)
+        {
 
-        $productsQuery = Product::query();
-//        $productsQuery = Product::with('category');
+            $productsQuery = Product::query();
+    //        $productsQuery = Product::with('category');
 
-        if ($request->filled('price_from')) {
-            $productsQuery->where('price', '>=', $request->price_from);
-        }
-
-        if ($request->filled('price_to')) {
-            $productsQuery->where('price', '<=', $request->price_to);
-        }
-
-        foreach (['hit', 'new', 'recommend'] as $field) {
-            if ($request->has($field)) {
-                $productsQuery->where($field, 1);
+            if ($request->filled('price_from')) {
+                $productsQuery->where('price', '>=', $request->price_from);
             }
-        }
+
+            if ($request->filled('price_to')) {
+                $productsQuery->where('price', '<=', $request->price_to);
+            }
+
+            foreach (['hit', 'new', 'recommend'] as $field) {
+                if ($request->has($field)) {
+                    $productsQuery->where($field, 1);
+                }
+            }
 
 
-        $products = $productsQuery->paginate(6)->withPath($request->getQueryString());
-//        $products = $productsQuery->all()->withPath($request->getQueryString());
-        $currencies = Currency::all();
-        return view('index', compact('products', 'currencies'));
-    }*/
+            $products = $productsQuery->paginate(6)->withPath($request->getQueryString());
+    //        $products = $productsQuery->all()->withPath($request->getQueryString());
+            $currencies = Currency::all();
+            return view('index', compact('products', 'currencies'));
+        }*/
 
     public function changeLocale($locale)
     {

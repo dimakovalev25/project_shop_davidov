@@ -15,6 +15,7 @@ class FilterRequest extends FormRequest
     {
         return [
             'price_from'=> '',
+            'category_id'=> '',
             'price_to'=> '',
             'hit'=> '',
             'new'=> '',
