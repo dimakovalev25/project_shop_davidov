@@ -34,6 +34,7 @@ class BasketController extends Controller
 
     public function order()
     {
+        $currencies = Currency::all();
         $basket = new Basket();
         $order = $basket->getOrder();
 
@@ -42,8 +43,10 @@ class BasketController extends Controller
             return redirect()->route('basket');
         }
 
-        return view('order', compact('order'));
+        return view('order', compact('order','currencies'));
     }
+
+
 
     public function basketAdd(Product $product)
     {

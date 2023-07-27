@@ -6,9 +6,24 @@ use App\Models\Currency;
 
 class CurrencyConversion
 {
-
+    public const DEFAULT_CURRENCY_CODE = 'BY';
     protected static $container;
 
+    public static function getCurrencyFromSession()
+    {
+        return session('currency', self::DEFAULT_CURRENCY_CODE);
+    }
+
+    public static function getCurrentCurrencyFromSession()
+    {
+        self::loadContainer();
+        $currencyCode = self::getCurrencyFromSession();
+        foreach (self::$container as $currency) {
+            if ($currency->code === $currencyCode) {
+                return $currency;
+            }
+        }
+    }
 
     public static function loadContainer()
     {
@@ -16,36 +31,31 @@ class CurrencyConversion
             $currensies = Currency::all();
             foreach ($currensies as $currency) {
                 self::$container[$currency->code] = $currency;
-
             }
         }
-
-
     }
 
-    public static function convert($sum, $originCurrencyCode = 'BY', $targetCurrencyCode = null)
+    public static function convert($sum, $originCurrencyCode = self::DEFAULT_CURRENCY_CODE, $targetCurrencyCode = null)
     {
         self::loadContainer();
-//        $originCurrency = Currency::byCode($originCurrencyCode)->first();
         $originCurrency = self::$container[$originCurrencyCode];
+
+ /*       if ($originCurrency->code != self::DEFAULT_CURRENCY_CODE) {
+
+        }*/
+
         if (is_null($targetCurrencyCode)) {
-            $targetCurrencyCode = session('currency', 'BY');
+            $targetCurrencyCode = self::getCurrencyFromSession();
         }
-
-            $targetCurrency = self::$container[$targetCurrencyCode];
-//        $targetCurrency = Currency::byCode($targetCurrencyCode)->first();
-
+        $targetCurrency = self::$container[$targetCurrencyCode];
         return $sum / $originCurrency->rate * $targetCurrency->rate;
     }
-
 
     public static function getCurrencySymbol()
     {
         self::loadContainer();
-        $currenctGromSession = session('currency', 'BY');
-
-//        $currency = Currency::byCode(session('currency', 'BY'))->first();
-        $currency = self::$container[$currenctGromSession];
+        $currenctFromSession = self::getCurrencyFromSession();
+        $currency = self::$container[$currenctFromSession];
         return $currency->symbol;
     }
 }

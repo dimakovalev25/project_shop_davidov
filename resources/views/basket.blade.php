@@ -35,7 +35,10 @@
                                 <img height="56px"
                                      src="{{ asset($product->image) }}" width= '60' height='60' class="img img-responsive"
                             </td>
-                            <td><span class="badge">{{ $product->pivot->count }}</span>
+                            <td>
+
+{{--                                <span class="badge">{{ $product->pivot->count }}</span>--}}
+                                <span class="badge">{{ $product->countInOrder }}</span>
                                 <div class="btn-group form-inline">
 
                                     <form method="POST" action="{{route('basket-add', $product)}}">
@@ -56,13 +59,13 @@
                                 </div>
                             </td>
                             <td>{{  $product->price }} {{App\Services\CurrencyConversion::getCurrencySymbol()}}</td>
-                            <td>{{ $product->getPriceForCount() }} {{App\Services\CurrencyConversion::getCurrencySymbol()}}</td>
+                            <td>{{ $product->price * $product->countInOrder}} {{App\Services\CurrencyConversion::getCurrencySymbol()}}</td>
                         </tr>
                     @endforeach
 
                     <tr>
                         <td colspan="4"><h3> Full price:</h3></td>
-                        <td>{{$order->getFullPrice()}} {{App\Services\CurrencyConversion::getCurrencySymbol()}} </td>
+                        <td>{{$order->getFullSum()}} {{App\Services\CurrencyConversion::getCurrencySymbol()}} </td>
                     </tr>
                     </tbody>
                 </table>

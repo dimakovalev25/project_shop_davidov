@@ -12,11 +12,12 @@ class BasketIsNotEmpty
 
     public function handle(Request $request, Closure $next): Response
     {
-        $order_id = session('order_id');
+        $order = session('order');
 
-        if (!is_null($order_id)) {
+        if (!is_null($order)) {
             return $next($request);
         }
+        session()->forget('order');
         session()->flash('warning', 'your basket is empty');
         return redirect()->route('index');
     }
