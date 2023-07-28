@@ -14,6 +14,13 @@ class CurrencyConversion
         return session('currency', self::DEFAULT_CURRENCY_CODE);
     }
 
+    public static function getCurrencies()
+    {
+        self::loadContainer();
+
+        return self::$container;
+    }
+
     public static function getCurrentCurrencyFromSession()
     {
         self::loadContainer();

@@ -20,9 +20,9 @@ class MainController extends Controller
         $data = $request->validated();
         $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($data)]);
         $products = Product::filter($filter)->paginate(9)->withQueryString();;
-        $currencies = Currency::all();
-        $categories = Category::all();
-        return view('index', compact('products', 'currencies', 'categories'));
+/*        $currencies = Currency::all();
+        $categories = Category::all();*/
+        return view('index', compact('products'));
     }
 
     /*    public function index(ProductsFilterRequest $request)
@@ -67,10 +67,8 @@ class MainController extends Controller
     public function changeCurrency($currencyCode)
     {
         $currency = Currency::byCode($currencyCode)->first();
-//        dd($currency);
         session(['currency' => $currency->code]);
         return redirect()->back();
-//        dd($currencyCode);
     }
 
     public function subscribe(Request $request, Product $product)
@@ -85,23 +83,23 @@ class MainController extends Controller
 
     public function category(Category $category)
     {
-        $currencies = Currency::all();
+//        $currencies = Currency::all();
 //        $category = Category::where('code', $category->code)->first();
-        return view('category', compact('category', 'currencies'));
+        return view('category', compact('category'));
     }
 
     public function categories()
     {
-        $currencies = Currency::all();
-        $categories = Category::all();
-        return view('categories', compact('categories', 'currencies'));
+//        $currencies = Currency::all();
+//        $categories = Category::all();
+        return view('categories');
     }
 
     public function product($product_id)
     {
-        $currencies = Currency::all();
+//        $currencies = Currency::all();
         $product = Product::where('id', $product_id)->firstOrFail();;
-        return view('product', compact('product', 'currencies'));
+        return view('product', compact('product'));
     }
 
 

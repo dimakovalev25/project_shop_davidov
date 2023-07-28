@@ -32,5 +32,11 @@ div.form-inline form{
 .main_filters_categories{
     display: flex;
     width: 30%;
+}
 
+footer {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    color: #99979c;
+    background-color: #2a2730;
 }

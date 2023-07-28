@@ -50,27 +50,6 @@
                         @endforeach
                     </ul>
                 </li>
-{{--                <li>
-                    <div>
-                            @csrf
-                            <select class="form-select" style="margin-top: 14px" aria-label="Default select example"
-                                    name="currency">
-                                @foreach($currencies as $currency )
-                                    <div>
-                                        <option value="{{$currency->id}}">
-                                            --}}{{--                                @lang('main.curr'):--}}{{--
-                                            {{$currency->code}}
-
-                                        </option>
-                                    </div>
-
-                                    <a href="{{route('currency', $currency->code )}}" style="color: red;">Change currency</a>
-                                @endforeach
-                            </select>
-
-                    </div>
-                </li>--}}
-
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -108,6 +87,26 @@
     </div>
 </div>
 
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6"><p>Categories</p>
+                <ul>
+                    @foreach($categories as $category)
+                        <li><a href="{{ route('category', $category->code) }}">{{ $category->__('name') }}</a></li>
+                    @endforeach
+                </ul>
+            </div>
+            <div class="col-lg-6"><p>The most popular products</p>
+                <ul>
+{{--                    @foreach ($bestProducts as $bestProduct)
+                        <li><a href="{{ route('product', [$bestProduct->category->code, $bestProduct->code]) }}">{{ $bestProduct->name }}</a></li>
+                    @endforeach--}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
 
 </body>
 
