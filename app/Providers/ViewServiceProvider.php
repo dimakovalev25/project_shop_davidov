@@ -19,5 +19,6 @@ class ViewServiceProvider extends ServiceProvider
     {
         View::composer(['layouts.master','categories','index' ], 'App\ViewComposers\CategoriesComposer');
         View::composer(['layouts.master','categories' ], 'App\ViewComposers\CurrenciesComposer');
+        View::composer(['layouts.master','categories' ], 'App\ViewComposers\BestProductsComposer');
     }
 }

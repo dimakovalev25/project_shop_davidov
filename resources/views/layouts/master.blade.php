@@ -93,15 +93,15 @@
             <div class="col-lg-6"><p>Categories</p>
                 <ul>
                     @foreach($categories as $category)
-                        <li><a href="{{ route('category', $category->code) }}">{{ $category->__('name') }}</a></li>
+                        <li><a href="{{ route('category', $category->id) }}">{{ $category->__('name') }}</a></li>
                     @endforeach
                 </ul>
             </div>
             <div class="col-lg-6"><p>The most popular products</p>
                 <ul>
-{{--                    @foreach ($bestProducts as $bestProduct)
-                        <li><a href="{{ route('product', [$bestProduct->category->code, $bestProduct->code]) }}">{{ $bestProduct->name }}</a></li>
-                    @endforeach--}}
+                    @foreach ($bestProducts as $bestProduct)
+                        <li><a href="{{ route('product', $bestProduct->id) }}">{{ $bestProduct->name }}</a></li>
+                    @endforeach
                 </ul>
             </div>
         </div>
