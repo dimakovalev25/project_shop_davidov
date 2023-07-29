@@ -46,6 +46,7 @@ Route::middleware(['set_locale'])->group(function () {
             Route::resource('/categories', 'App\Http\Controllers\Admin\CategoryController');
             Route::resource('/products', 'App\Http\Controllers\Admin\ProductController');
             Route::resource('/properties', 'App\Http\Controllers\Admin\PropertyController');
+            Route::resource('/coupons', 'App\Http\Controllers\Admin\CouponController');
             Route::resource('/property_options', 'App\Http\Controllers\Admin\PropertyOptionsController');
         });
     });

@@ -7,10 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    use HasFactory;
 
 //    protected $fillable = ['user_id', 'currency_id', 'sum'];
     protected $guarded = [];
+
+    public function coupon()
+    {
+        return $this->belongsTo(Coupon::class);
+    }
 
     public function products()
     {

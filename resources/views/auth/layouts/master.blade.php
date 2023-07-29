@@ -47,6 +47,9 @@
                                     <a href="/admin/categories">Categories</a>
                                 </li>
                                 <li>
+                                    <a href="/admin/coupons">Coupons</a>
+                                </li>
+                                <li>
                                     <a href="/admin/properties">Properties</a>
                                 </li>
                                 <li>
