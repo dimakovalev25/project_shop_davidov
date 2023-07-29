@@ -46,6 +46,12 @@
                                 <li>
                                     <a href="/admin/categories">Categories</a>
                                 </li>
+                                <li>
+                                    <a href="/admin/properties">Properties</a>
+                                </li>
+                                <li>
+                                    <a href="/admin/property_options">Property Options</a>
+                                </li>
                             @else
                                 <li><a href="{{route('orders.index')}}">My Orders</a></li>
                             @endif

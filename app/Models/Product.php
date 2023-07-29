@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use HasFactory;
     use SoftDeletes;
     use Translatable;
     use Filterable;
@@ -25,6 +24,17 @@ class Product extends Model
     {
         return $category = Category::find($this->category_id);
 
+    }
+
+    public function properties()
+    {
+        return $this->belongsToMany(Property::class);
+
+    }
+
+    public function skus()
+    {
+        return $this->hasMany(Sku::class);
     }
 
     public function isAvailable()
