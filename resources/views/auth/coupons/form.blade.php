@@ -49,7 +49,7 @@
                 </div>
                 <br>
 
-                <div class="input-group row">
+{{--                <div class="input-group row">
                     <div>
                         <label for="only_once" class="col-sm-2 col-form-label">Only_once: </label>
                     </div>
@@ -57,7 +57,7 @@
                         <input type="number" class="form-control" name="only_once" id="only_once"
                                value="@isset($coupon){{ $coupon->only_once }}@endisset">
                     </div>
-                </div>
+                </div>--}}
 
                 <br>
 
@@ -104,6 +104,33 @@
                         </select>
                     </div>
                 </div>
+
+
+
+                    <br>
+                    <div class="input-group row">
+                        <label for="only" class="col-sm-2 col-form-label">Only_once? </label>
+                    </div>
+
+                    @foreach([
+
+                        'only_once' => 'Only_once',
+
+                        ] as $field => $title)
+
+                        <div class="form-check">
+                            <input class="form-check-input" name="{{$field}}" id="{{$field}}" type="checkbox"
+                                   id="flexCheckChecked"
+                                   @if  ( isset($coupon) && $coupon->$field === 1)
+                                       checked="checked"
+                                    @endif
+                            >
+                            <label class="form-check-label" for="flexCheckChecked">
+                                {{$title}}:
+                            </label>
+                        </div>
+                        <br>
+                    @endforeach
 
 
                 <button class="btn btn-success">Save</button>

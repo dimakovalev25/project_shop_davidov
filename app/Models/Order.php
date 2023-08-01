@@ -16,6 +16,11 @@ class Order extends Model
         return $this->belongsTo(Coupon::class);
     }
 
+    public function hasCoupon()
+    {
+        return $this->coupon;
+    }
+
     public function products()
     {
         return $this->belongsToMany(Product::class)->withPivot('count', 'price')->withTimestamps();
@@ -37,12 +42,16 @@ class Order extends Model
     }
 
 
-    public function getFullSum()
+    public function getFullSum($withCoupon = true)
     {
         $sum = 0;
 
         foreach ($this->products as $product) {
             $sum += $product->price * $product->countInOrder;
+        }
+
+        if ($withCoupon && $this->hasCoupon()) {
+            $sum = $this->coupon->applyCost($sum, $this->currency);
         }
 
         return $sum;

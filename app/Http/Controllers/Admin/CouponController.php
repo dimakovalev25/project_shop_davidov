@@ -26,6 +26,13 @@ class CouponController extends Controller
     public function store(CouponRequest $request)
     {
         $data = $request->validated();
+
+        foreach ([ 'only_once', 'absolute'] as $fieldName) {
+            if(isset($data[$fieldName])){
+                $data[$fieldName] = 1;
+            }
+        }
+
         Coupon::create($data);
 
         return redirect()->route('coupons.index');

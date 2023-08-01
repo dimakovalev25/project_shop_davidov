@@ -3,6 +3,7 @@
 namespace App\Classes;
 
 use App\Mail\OrderCreated;
+use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\Product;
 use App\Services\CurrencyConversion;
@@ -34,7 +35,6 @@ class Basket
     {
         return $this->order;
     }
-
     public function saveOrder($name, $phone, $email)
     {
         if (!$this->countAvailable(true)) {
@@ -44,7 +44,6 @@ class Basket
         Mail::to($email)->send(new OrderCreated($name, $this));
         return true;
     }
-
     public function countAvailable($updateCount = false)
     {
 
@@ -65,7 +64,6 @@ class Basket
 
         return true;
     }
-
     public function removeProduct(Product $product)
     {
         if ($this->order->products->contains($product)) {
@@ -102,6 +100,11 @@ class Basket
         }*/
 
         return true;
+    }
+
+    public function setCoupon(Coupon $coupon)
+    {
+        $this->order->coupon()->associate($coupon);
     }
 
 }

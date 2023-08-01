@@ -25,6 +25,7 @@ Route::middleware(['set_locale'])->group(function () {
     Route::post('/basket/remove/{product}',
         'App\Http\Controllers\BasketController@basketRemove')->name('basket-remove');
     Route::post('/basket/add/{product}', 'App\Http\Controllers\BasketController@basketAdd')->name('basket-add');
+    Route::post('/coupon','App\Http\Controllers\BasketController@setCoupon' )->name('set-coupon');
     Route::get('/logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('get-logout');
 
     Auth::routes([
