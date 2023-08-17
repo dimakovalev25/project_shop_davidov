@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Mail;
 class Basket
 {
     protected $order;
+    public $c;
 
     public function __construct($createOrder = false)
     {
