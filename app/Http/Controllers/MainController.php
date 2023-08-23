@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Basket;
 use App\Http\Filters\ProductFilter;
 use App\Http\Requests\FilterRequest;
 use App\Http\Requests\ProductsFilterRequest;
@@ -9,20 +10,26 @@ use App\Models\Category;
 use App\Models\Currency;
 use App\Models\Models\Subscription;
 use App\Models\Product;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cookie;
 
 class MainController extends Controller
 {
 
     public function index(FilterRequest $request)
     {
+        $basket = new Basket();
+        $order = $basket->getOrder();
+
+
         $data = $request->validated();
         $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($data)]);
-        $products = Product::filter($filter)->paginate(9)->withQueryString();;
-/*        $currencies = Currency::all();
-        $categories = Category::all();*/
-        return view('main', compact('products'));
+        $products = Product::filter($filter)->paginate(9)->withQueryString();
+        $currencies = Currency::all();
+        $categories = Category::all();
+        return view('main', compact('products', 'categories', 'currencies', 'order'));
     }
 
 
@@ -68,11 +75,30 @@ class MainController extends Controller
         return view('categories');
     }
 
-    public function product($product_id)
+    public function product(FilterRequest $request, $product_id)
     {
+        $product = Product::where('id', $product_id)->firstOrFail();
 
-        $product = Product::where('id', $product_id)->firstOrFail();;
-        return view('product', compact('product'));
+        $data = $request->validated();
+        $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($data)]);
+        $products = Product::filter($filter)->paginate(9)->withQueryString();
+
+        $currencies = Currency::all();
+        $categories = Category::all();
+
+        Cookie::queue(Cookie::make('test1', $product_id, 10000000));
+        return  redirect()->route('productshow', $product);
+
+        return view('layouts.product', compact('product', 'products', 'currencies', 'categories'));
+    }
+
+    public function productshow(Request $request)
+    {
+        $product_id = Cookie::get('test1');
+        $product = Product::where('id', $product_id)->firstOrFail();
+
+        return view('layouts.productshow', compact('product'));
+        
     }
 
 

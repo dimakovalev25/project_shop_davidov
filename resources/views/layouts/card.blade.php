@@ -1,45 +1,41 @@
-<div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-        <div class="labels">
-            @if($product->isNew())
-                <span style="background-color:orange;" class="badge text-bg-primary">New product</span>
-            @endif
-            @if($product->isRecommend())
-                <span style="background-color:green;" class="badge">Recommend</span>
-            @endif
-            @if($product->isHit())
-                <span class="badge" style="background-color:darkcyan;" >Bestseller</span>
-            @endif
-
+<div class="product">
+    <div class="product_image">
+        <img src="{{ asset($product->image) }}" alt="{{$product->__('name')}}">
+    </div>
+    @if($product->isNew())
+        <div class="product_extra product_new">
+            <a href="categories.html">New</a>
         </div>
-
-
-        <img src="{{ asset($product->image) }}" width='60' height='60' class="img img-responsive"
-             alt="{{$product->__('name')}}">
-        <div class="caption">
-            <h3>{{$product->__('name')}}</h3>
-            <h3>{{$product->__('description')}}</h3>
-            <p>{{$product->price}} {{App\Services\CurrencyConversion::getCurrencySymbol()}} </p>
-            {{--            {{$product->category->name}}--}}
+    @endif
+    @if($product->isRecommend())
+        <div class="product_extra product_sale">
+            <a href="categories.html">Sale</a>
+        </div>
+    @endif
+    @if($product->isHit())
+        <div class="product_extra product_hot">
+            <a href="categories.html">Hit</a>
+        </div>
+    @endif
+    <div class="product_content">
+        <div class="product_title">
+            <a href="{{route('product', compact('product'))}}">{{$product->__('name')}}</a>
+        </div>
+        <div class="product_price"><p>{{$product->price}} {{App\Services\CurrencyConversion::getCurrencySymbol()}} </p></div>
+        <form method="POST" action="{{route('basket-add', $product)}}">
+            @csrf
             <p>
-                <a href="{{route('product', compact('product'))}}" class="btn btn-primary"
-                   role="button">...</a>
+
+                @if($product->isAvailable())
+{{--                <button type="submit" class="button button_light home_button">Add to cart</button>--}}
+                    <button  type="submit" class="newsletter_button trans_200"><span>Add to cart</span></button>
+                @else
+                    <span class="warning">item is out of stock</span>
+                @endif
             </p>
-
-            <form method="POST" action="{{route('basket-add', $product)}}">
-                @csrf
-                <p>
-
-                    @if($product->isAvailable())
-                        <button type="submit" class="btn btn-primary"
-                                role="button">add to basket
-                        </button>
-                    @else
-                        <span class="warning">item is out of stock</span>
-
-                    @endif
-                </p>
-            </form>
-        </div>
+        </form>
     </div>
 </div>
+
+
+

@@ -9,14 +9,12 @@
 
     @else
         <div class="starter-template">
-            <h1>Basket</h1>
-            <p>order</p>
             <div class="panel">
                 <table class="table table-striped">
                     <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Image</th>
+                        <th>Description</th>
                         <th>Quantity</th>
                         <th>Price</th>
                         <th>Full price</th>
@@ -25,34 +23,30 @@
                     <tbody>
 
                     @foreach( $order->products as $product )
+{{--                        @php
+                            dd($order->products->count())
+                        @endphp--}}
                         <tr>
                             <td>
-                                <a href="http://laravel-diplom-1.rdavydov.ru/mobiles/iphone_x_64">
+                                <a href="">
                                     {{ $product->name }}
                                 </a>
                             </td>
                             <td>
-                                <img height="56px"
-                                     src="{{ asset($product->image) }}" width='60' height='60'
-                                     class="img img-responsive"
-                            </td>
-                            <td>
-
-                                {{--                                <span class="badge">{{ $product->pivot->count }}</span>--}}
                                 <span class="badge">{{ $product->countInOrder }}</span>
                                 <div class="btn-group form-inline">
 
                                     <form method="POST" action="{{route('basket-add', $product)}}">
                                         @csrf
                                         <button class="btn btn-success">
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                            <span class="" aria-hidden="true">+</span>
                                         </button>
                                     </form>
 
                                     <form method="POST" action="{{route('basket-remove', $product)}}">
                                         @csrf
                                         <button type="submit" class="btn btn-danger">
-                                            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                            <span class="" aria-hidden="true">-</span>
                                         </button>
                                     </form>
 
@@ -65,24 +59,16 @@
                     @endforeach
 
                     <tr>
-                        <td colspan="4"><h4> Full price:</h4></td>
+                        <td colspan="4"> Full price:</td>
                         <td>{{$order->getFullSum()}} {{App\Services\CurrencyConversion::getCurrencySymbol()}} </td>
                     </tr>
                     </tbody>
                 </table>
-                <br>
-                <div class="btn-group pull-right" role="group">
-                    <a type="button" class="btn btn-success" href={{route('order')}}>order</a>
-                    <hr>
-                </div>
             </div>
-
-
         </div>
 
         @if(!$order->hasCoupon())
             <div class="row coupon">
-
                 <div class="form-inline pull-right">
                     <form method="POST" action="{{route('set-coupon')}}">
                         @csrf
@@ -99,9 +85,13 @@
 
         @else
             <h4>you are using a coupon: " {{ $order->coupon->code }} "</h4>
-
         @endif
 
+        <div style="margin-top: 1rem;">
+            <div style="display: flex;   justify-content: flex-end;">
+                <a type="button" class="btn btn-primary" href={{route('order')}}>send an order</a>
+            </div>
+        </div>
 
     @endif
 @endsection

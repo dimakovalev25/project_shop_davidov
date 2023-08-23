@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'online_shop' => 'Online shop Apple',
+    'online_shop' => 'Home',
     'goods' => 'Products',
     'categories' => 'Categories',
     'basket' => 'Basket',

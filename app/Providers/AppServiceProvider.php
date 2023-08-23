@@ -26,6 +26,9 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Product::observe(ProductObserver::class);
-        Paginator::useBootstrap();
+        /*Paginator::useBootstrap();*/
+
+        Paginator::defaultView('vendor.pagination.simple-bootstrap-4');
+        Paginator::defaultSimpleView('vendor.pagination.default');
     }
 }
