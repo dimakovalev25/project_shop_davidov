@@ -30,7 +30,7 @@
                 Return back site!
             </a>
 
-            <div id="navbar" class="collapse navbar-collapse">
+            <div id="navbar" class="collapse navbar-collapse navb">
                 <ul class="nav navbar-nav">
                     @guest()
                         <li><a href="{{route('categories.index')}}">Category</a></li>

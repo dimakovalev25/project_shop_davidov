@@ -2,13 +2,13 @@
     <div class="thumbnail">
         <div class="labels">
             @if($product->isNew())
-                <span class="badge badge-success">New product</span>
+                <span style="background-color:orange;" class="badge text-bg-primary">New product</span>
             @endif
             @if($product->isRecommend())
-                <span class="badge badge-warning">Recommend</span>
+                <span style="background-color:green;" class="badge">Recommend</span>
             @endif
             @if($product->isHit())
-                <span class="badge badge-warning">Bestseller</span>
+                <span class="badge" style="background-color:darkcyan;" >Bestseller</span>
             @endif
 
         </div>

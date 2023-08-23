@@ -22,35 +22,9 @@ class MainController extends Controller
         $products = Product::filter($filter)->paginate(9)->withQueryString();;
 /*        $currencies = Currency::all();
         $categories = Category::all();*/
-        return view('index', compact('products'));
+        return view('main', compact('products'));
     }
 
-    /*    public function index(ProductsFilterRequest $request)
-        {
-
-            $productsQuery = Product::query();
-    //        $productsQuery = Product::with('category');
-
-            if ($request->filled('price_from')) {
-                $productsQuery->where('price', '>=', $request->price_from);
-            }
-
-            if ($request->filled('price_to')) {
-                $productsQuery->where('price', '<=', $request->price_to);
-            }
-
-            foreach (['hit', 'new', 'recommend'] as $field) {
-                if ($request->has($field)) {
-                    $productsQuery->where($field, 1);
-                }
-            }
-
-
-            $products = $productsQuery->paginate(6)->withPath($request->getQueryString());
-    //        $products = $productsQuery->all()->withPath($request->getQueryString());
-            $currencies = Currency::all();
-            return view('index', compact('products', 'currencies'));
-        }*/
 
     public function changeLocale($locale)
     {
@@ -90,14 +64,13 @@ class MainController extends Controller
 
     public function categories()
     {
-//        $currencies = Currency::all();
-//        $categories = Category::all();
+
         return view('categories');
     }
 
     public function product($product_id)
     {
-//        $currencies = Currency::all();
+
         $product = Product::where('id', $product_id)->firstOrFail();;
         return view('product', compact('product'));
     }
