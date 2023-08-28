@@ -26,6 +26,17 @@ class Order extends Model
         return $this->belongsToMany(Product::class)->withPivot('count', 'price')->withTimestamps();
     }
 
+    public function counter()
+    {
+        $cnt = 0;
+
+        foreach ($this->products as $product) {
+            $cnt += $product->countInOrder;
+        }
+        return $cnt;
+
+    }
+
 
     public function scopeActive($query)
     {

@@ -7,6 +7,8 @@ Route::middleware(['set_locale'])->group(function () {
     Route::get('/', 'App\Http\Controllers\MainController@index')->name('index');
     Route::get('/categories/{category}', 'App\Http\Controllers\MainController@category')->name('category');
     Route::get('/categories', 'App\Http\Controllers\MainController@categories')->name('categories');
+    Route::get('/info', 'App\Http\Controllers\MainController@info')->name('info');
+    Route::get('/categoriesshow', 'App\Http\Controllers\MainController@categoriesshow')->name('categoriesshow');
     Route::get('/product/{product}', 'App\Http\Controllers\MainController@product')->name('product');
     Route::get('/productshow', 'App\Http\Controllers\MainController@productshow')->name('productshow');
 

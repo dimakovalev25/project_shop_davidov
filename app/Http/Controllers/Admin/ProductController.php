@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+
 
 class ProductController extends Controller
 {
@@ -38,6 +41,33 @@ class ProductController extends Controller
         return redirect()->route('products.index');
 
     }
+
+/*    public function store2(Request $request)
+    {
+        $data = $request->all();
+        foreach (['new', 'hit', 'recommend'] as $fieldName) {
+            if(isset($data[$fieldName])){
+                $data[$fieldName] = 1;
+            }
+        }
+        $filename = $data['image']->getClientOriginalName();
+        $data['image']->move(Storage::path('\public\images').$filename);
+
+        //Создаем миниатюру изображения и сохраняем ее
+        $thumbnail = Image::make(Storage::path('\public\images').$filename);
+        $thumbnail->fit(300, 300);
+        $thumbnail->save(Storage::path('\public\images').$filename);
+
+        //Сохраняем новость в БД
+        $data['image'] = $filename;
+        Product::create($data);
+        return redirect()->route('products.index');
+    }*/
+
+
+
+
+
     public function show(Product $product)
     {
         return view('auth.products.show', compact('product'));

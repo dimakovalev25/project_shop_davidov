@@ -22,6 +22,9 @@ class BasketController extends Controller
 
     public function orderApprove(Request $request)
     {
+        session()->flash('success', 'order accepted for processing');
+        return redirect()->route('index');
+
         $email = Auth::check() ? Auth::user()->email : $request->email;
 
         if ((new Basket())->saveOrder($request->name, $request->phone, $email)) {
@@ -89,7 +92,7 @@ class BasketController extends Controller
 
 
 //old variants
-    /*    public function basket()
+/*    public function basket()
         {
             $order = (new Basket())->getOrder();
             return view('basket', compact('order'));

@@ -1187,12 +1187,13 @@ section
 .newsletter_button
 {
 	position: relative;
-	width: 178px;
+	width: 78px;
 	height: 61px;
 	border: solid 2px #1b1b1b;
 	background: #FFFFFF;
 	cursor: pointer;
-	margin-top: 55px;
+/*	margin-top: 55px;
+	margin-bottom: 5px;*/
 	overflow: hidden;
 }
 .newsletter_button span

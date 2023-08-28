@@ -196,7 +196,7 @@
 	}
 	.footer_content
 	{
-		height: 200px;
+		min-height: 200px;
 	}
 	.footer_logo,
 	.copyright,

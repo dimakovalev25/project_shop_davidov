@@ -1197,6 +1197,7 @@ section
 }
 .product_grid
 {
+
 	margin-top: 88px;
 }
 
@@ -1242,6 +1243,7 @@ section
 }
 .product_content
 {
+	border: 1rem solid red;
 	width: 100%;
 	padding-top: 36px;
 	padding-bottom: 38px;

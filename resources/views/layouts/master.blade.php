@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Sublime</title>
+    <title>Apples shop</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Sublime project">
+    <meta name="description" content="Apples shop">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
     <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -13,13 +13,12 @@
     <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
     <link rel="stylesheet" type="text/css" href="styles/main_styles.css">
     <link rel="stylesheet" type="text/css" href="styles/responsive.css">
-{{--    <link href="{{ asset('styles/bootstrap4/bootstrap.min.css') }}">--}}
-{{--    <link href="{{ asset('plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}">--}}
-{{--    <link href="{{ asset('plugins/OwlCarousel2-2.2.1/owl.carousel.css') }}">--}}
-{{--    <link href="{{ asset('plugins/OwlCarousel2-2.2.1/owl.theme.default.css') }}">--}}
-{{--    <link href="{{ asset('plugins/OwlCarousel2-2.2.1/animate.css') }}">--}}
-{{--    <link href="{{ asset('styles/main_styles.css') }}">--}}
-{{--    <link href="{{ asset('styles/responsive.css') }}">--}}
+
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images//favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images//favicon-16x16.png">
+    <link rel="manifest" href="images/site.webmanifest">
+
 </head>
 <body>
 
@@ -36,26 +35,56 @@
                             <div class="logo"><a href="{{route('index')}}">Apples shop</a></div>
                             <nav class="main_nav">
                                 <ul>
+
+                                    <li @routeactive('basket')>
+                                        {{--                <a href="{{route('locale', __('main.set_lang'))}}">@lang('main.lang')
+                                                            : @lang('main.set_lang')</a>--}}
+
+                                        <a href="{{route('locale', __('main.set_lang'))}}">@lang('main.l')
+                                        </a>
+                                    </li>
+
+
                                     <li class="hassubs">
-                                        <a href="{{route('categories' )}}">@lang('main.categories')</a>
+                                        <a href="{{route('index' )}}">@lang('main.categories')</a>
                                         <ul>
                                             @foreach($categories as $category)
-                                                <li><a href="categories.html">{{$category->name}}</a></li>
+                                                <li>
+                                                    {{--                                                    <a href="{{ route("category", $category->id) }}">{{$category->name}}</a>--}}
+                                                    <a href="{{ route("category", $category->id) }}">{{$category->__('name')}}</a>
+                                                </li>
                                             @endforeach
                                         </ul>
                                     </li>
-                                    <li><a href="{{route('basket')}}">@lang('main.basket')</a></li>
-                                    <li @routeactive('basket')>
-                                        <a href="{{route('locale', __('main.set_lang'))}}">@lang('main.lang')
-                                            : @lang('main.set_lang')</a>
+
+
+                                    <li class="hassubs">
+                                        <a href="{{route('index' )}}">@lang('main.chosse_curr')</a>
+                                        <ul>
+                                            @foreach($currencies as $currency)
+                                                <li>
+                                                    <a href="{{ route('currency', $currency->code) }}">{{$currency->code}}</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
                                     </li>
 
                                     <li class="hassubs">
-                                        <a href="{{route('categories' )}}">@lang('main.chosse_curr')</a>
+                                        <a href="{{route('info' )}}">@lang('main.info')</a>
                                         <ul>
-                                            @foreach($currencies as $currency)
-                                                <li><a href="categories.html">{{$currency->code}}</a></li>
-                                            @endforeach
+
+                                            <li>
+                                                <a href="{{ route("info") }}">@lang('main.pay')</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="{{ route("info") }}">@lang('main.delivery')</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="{{ route("info") }}">@lang('main.gar')</a>
+                                            </li>
+
                                         </ul>
                                     </li>
 
@@ -63,7 +92,7 @@
                             </nav>
                             <div class="header_extra ml-auto">
                                 <div class="shopping_cart">
-                                    <a href="cart.html">
+                                    <a href="{{route('basket')}}">
                                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                                              xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                              viewBox="0 0 489 489" style="enable-background:new 0 0 489 489;"
@@ -76,11 +105,12 @@
 													c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5v-41h45.2l26.9,302.3C412.8,445.2,392.1,462,366.8,462z"/>
                                             </g>
 										</svg>
-                                        <div>@lang('main.basket')<span>
-{{--                                                {{$order->products->count()}}--}}
-                                            </span></div>
+                                        <div>
+                                            {{--                                            <span>@lang('main.basket')</span>--}}
+                                        </div>
                                     </a>
                                 </div>
+
                                 <div class="search">
                                     <div class="search_icon">
                                         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +131,9 @@
 												c35.212,0,65.331,12.519,90.364,37.546c25.033,25.026,37.548,55.15,37.548,90.36C328.911,236.214,316.392,266.329,291.363,291.358z
 												"/>
                                         </g>
+
 									</svg>
+                                        {{--                                        <span>@lang('main.search')</span>--}}
                                     </div>
                                 </div>
                                 <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
@@ -117,11 +149,63 @@
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <div class="search_panel_content d-flex flex-row align-items-center justify-content-end">
-                            <form action="#">
-                                <input type="text" class="search_input" placeholder="Search" required="required">
-                            </form>
-                        </div>
+                        <form method="GET" action="{{route("index")}}">
+                            <div class="search_panel_content d-flex flex-row align-items-center justify-content-evenly">
+
+                                <div class="mr-2">
+                                    <label for="category_id">@lang('main.categories') </label>
+                                </div>
+
+                                <div class="mr-2">
+                                    <select name="category_id" id="category_id" class="form-control  search_layout_inp">
+                                        <option selected>@lang('main.chosse_cat')</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{$category->id}}">{{$category->name}}</option>
+
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="mr-2"><label for="price_from">@lang('main.price')@lang('main.for')
+                                    </label></div>
+
+                                <div class="mr-2">
+                                    <input class="form-control  search_layout_inp" type="text" name="price_from"
+                                           id="price_from" size="4"
+                                           value="{{ request()->price_from}}">
+                                </div>
+
+                                <div class="mr-2"><label for="price_to">@lang('main.to')
+                                    </label></div>
+
+
+                                <div class="mr-2">
+
+                                    <input class="form-control search_layout_inp" type="text" name="price_to"
+                                           id="price_to"
+                                           size="6"
+                                           value="{{ request()->price_to }}">
+                                </div>
+
+                                <div class="mr-2">
+                                    <label for="hit"></label>
+                                    <input type="checkbox" name="hit" id="hit"
+                                           @if(request()->has('hit')) checked @endif> @lang('main.hit')
+                                </div>
+
+                                <div class="mr-2">
+                                    <label for="new"> </label>
+                                    <input type="checkbox" name="new" id="new"
+                                           @if(request()->has('new')) checked @endif> @lang('main.new')
+                                    @lang('main.product') </div>
+
+                                <div class="mr-2">
+                                    <button type="submit" class="btn btn-primary">@lang('main.filter')</button>
+                                    <a href="{{ route("index") }}" class="btn btn-warning">@lang('main.reset')</a>
+                                </div>
+
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -130,10 +214,8 @@
         <!-- Social -->
         <div class="header_social">
             <ul>
-                <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
                 <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
             </ul>
         </div>
     </header>
@@ -145,44 +227,94 @@
             <div class="page_menu_content">
 
                 <div class="page_menu_search menu_mm">
-                    <form action="#">
-                        <input type="search" required="required" class="page_menu_search_input menu_mm"
-                               placeholder="Search for products...">
+
+                    <form method="GET" action="{{route("index")}}">
+                        <div class="search_layout">
+
+                            <div class="">
+                                <label for="category_id">@lang('main.categories'):
+                                </label>
+                                <select name="category_id" id="category_id" class="form-control search_layout_inp">
+                                    <option value="{{ old('category_id')}}" selected>@lang('main.chosse_cat')</option>
+
+                                </select>
+                            </div>
+
+
+                            <div>
+
+                                <label for="price_from">@lang('main.price')@lang('main.for')
+                                </label>
+                                <input class="form-control search_layout_inp" type="text" name="price_from"
+                                       id="price_from" size="4"
+                                       value="{{ request()->price_from}}">
+                            </div>
+
+                            <div>
+                                <label for="price_to">@lang('main.to')
+                                </label>
+                                <input class="form-control search_layout_inp" type="text" name="price_to" id="price_to"
+                                       size="6"
+                                       value="{{ request()->price_to }}">
+                            </div>
+
+                            <div class="">
+                                <label for="hit"></label>
+                                <input type="checkbox" name="hit" id="hit"
+                                       @if(request()->has('hit')) checked @endif> @lang('main.hit')
+
+                            </div>
+
+
+                            <div class="">
+                                <label for="new"> </label>
+                                <input type="checkbox" name="new" id="new"
+                                       @if(request()->has('new')) checked @endif> @lang('main.new')
+                                @lang('main.product')
+
+                            </div>
+
+                            <div class="">
+                                <label for="recommend"> </label>
+                                <input type="checkbox" name="recommend" id="recommend"
+                                       @if(request()->has('recommend')) checked @endif> @lang('main.rec')
+
+                            </div>
+
+                            <div class="">
+                                <button type="submit" class="btn btn-primary">@lang('main.filter')</button>
+                                <a href="{{ route("index") }}" class="btn btn-warning">@lang('main.reset')</a>
+                            </div>
+
+                        </div>
+                        {{--          <input type="search" required="required" class="page_menu_search_input menu_mm"
+                                         placeholder="Search for products...">--}}
                     </form>
+
                 </div>
+
+
                 <ul class="page_menu_nav menu_mm">
+
                     <li class="page_menu_item has-children menu_mm">
-                        <a href="index.html">Home<i class="fa fa-angle-down"></i></a>
+                        <a href="{{route('categories')}}">@lang('main.categories')<i class="fa fa-angle-down"></i></a>
                         <ul class="page_menu_selection menu_mm">
-                            <li class="page_menu_item menu_mm"><a href="categories.html">Categories<i
-                                            class="fa fa-angle-down"></i></a></li>
-                            <li class="page_menu_item menu_mm"><a href="product.html">Product<i
-                                            class="fa fa-angle-down"></i></a></li>
-                            <li class="page_menu_item menu_mm"><a href="cart.html">Cart<i class="fa fa-angle-down"></i></a>
-                            </li>
-                            <li class="page_menu_item menu_mm"><a href="checkout.html">Checkout<i
-                                            class="fa fa-angle-down"></i></a></li>
-                            <li class="page_menu_item menu_mm"><a href="contact.html">Contact<i
-                                            class="fa fa-angle-down"></i></a></li>
+
+                            @foreach($categories as $category)
+                                <li class="page_menu_item menu_mm"><a
+                                            href="{{ route("category", $category->id) }}">{{$category->name}}<i
+                                                class="fa fa-angle-down"></i></a></li>
+
+                            @endforeach
+
                         </ul>
                     </li>
-                    <li class="page_menu_item has-children menu_mm">
-                        <a href="categories.html">Categories<i class="fa fa-angle-down"></i></a>
-                        <ul class="page_menu_selection menu_mm">
-                            <li class="page_menu_item menu_mm"><a href="categories.html">Category<i
-                                            class="fa fa-angle-down"></i></a></li>
-                            <li class="page_menu_item menu_mm"><a href="categories.html">Category<i
-                                            class="fa fa-angle-down"></i></a></li>
-                            <li class="page_menu_item menu_mm"><a href="categories.html">Category<i
-                                            class="fa fa-angle-down"></i></a></li>
-                            <li class="page_menu_item menu_mm"><a href="categories.html">Category<i
-                                            class="fa fa-angle-down"></i></a></li>
-                        </ul>
+                    <li class="page_menu_item menu_mm"><a href="{{route('index')}}">@lang('main.to_pp')<i
+                                    class="fa fa-angle-down"></i></a>
                     </li>
-                    <li class="page_menu_item menu_mm"><a href="index.html">Accessories<i class="fa fa-angle-down"></i></a>
-                    </li>
-                    <li class="page_menu_item menu_mm"><a href="#">Offers<i class="fa fa-angle-down"></i></a></li>
-                    <li class="page_menu_item menu_mm"><a href="contact.html">Contact<i
+                    <li class="page_menu_item menu_mm"><a href="{{route('basket')}}">@lang('main.basket')<i
+                                    class="fa fa-angle-down"></i></a></li>
+                    <li class="page_menu_item menu_mm"><a href="{{route('index')}}">@lang('main.info')<i
                                     class="fa fa-angle-down"></i></a></li>
                 </ul>
             </div>
@@ -192,110 +324,100 @@
 
         <div class="menu_social">
             <ul>
-                <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
                 <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
             </ul>
         </div>
     </div>
 
     <!-- Home -->
 
-    {{--    <div class="home">
-            <div class="home_slider_container">
+    <div class="home">
+        <div class="home_slider_container">
 
-                <!-- Home Slider -->
-                <div class="owl-carousel owl-theme home_slider">
+            <!-- Home Slider -->
+            <div class="owl-carousel owl-theme home_slider">
 
-                    <!-- Slider Item -->
-                    <div class="owl-item home_slider_item">
-                        <div class="home_slider_background" style="background-image:url(images/home_slider_1.jpg)"></div>
-                        <div class="home_slider_content_container">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="home_slider_content" data-animation-in="fadeIn"
-                                             data-animation-out="animate-out fadeOut">
-                                            <div class="home_slider_title">A new Online Shop experience.</div>
-                                            <div class="home_slider_subtitle">Lorem ipsum dolor sit amet, consectetur
-                                                adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros. Sed
-                                                viverra velit venenatis fermentum luctus.
-                                            </div>
-                                            <div class="button button_light home_button"><a href="#">Shop Now</a></div>
+                <!-- Slider Item -->
+                <div class="owl-item home_slider_item">
+                    <div class="home_slider_background" style="background-image:url(images/a1.jpg)"></div>
+                    <div class="home_slider_content_container">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="home_slider_content" data-animation-in="fadeIn"
+                                         data-animation-out="animate-out fadeOut">
+                                        <div class="home_slider_title"><h2>@lang('main.slider_title')</h2></div>
+                                        <div class="home_slider_subtitle"><h3>@lang('main.slider_desc')</h3>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slider Item -->
-                    <div class="owl-item home_slider_item">
-                        <div class="home_slider_background" style="background-image:url(images/home_slider_1.jpg)"></div>
-                        <div class="home_slider_content_container">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="home_slider_content" data-animation-in="fadeIn"
-                                             data-animation-out="animate-out fadeOut">
-                                            <div class="home_slider_title">A new Online Shop experience.</div>
-                                            <div class="home_slider_subtitle">Lorem ipsum dolor sit amet, consectetur
-                                                adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros. Sed
-                                                viverra velit venenatis fermentum luctus.
-                                            </div>
-                                            <div class="button button_light home_button"><a href="#">Shop Now</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slider Item -->
-                    <div class="owl-item home_slider_item">
-                        <div class="home_slider_background" style="background-image:url(images/home_slider_1.jpg)"></div>
-                        <div class="home_slider_content_container">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="home_slider_content" data-animation-in="fadeIn"
-                                             data-animation-out="animate-out fadeOut">
-                                            <div class="home_slider_title">A new Online Shop experience.</div>
-                                            <div class="home_slider_subtitle">Lorem ipsum dolor sit amet, consectetur
-                                                adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros. Sed
-                                                viverra velit venenatis fermentum luctus.
-                                            </div>
-                                            <div class="button button_light home_button"><a href="#">Shop Now</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- Home Slider Dots -->
-
-                <div class="home_slider_dots_container">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                                <div class="home_slider_dots">
-                                    <ul id="home_slider_custom_dots" class="home_slider_custom_dots">
-                                        <li class="home_slider_custom_dot active">01.</li>
-                                        <li class="home_slider_custom_dot">02.</li>
-                                        <li class="home_slider_custom_dot">03.</li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- Slider Item -->
+                <div class="owl-item home_slider_item">
+                    <div class="home_slider_background" style="background-image:url(images/a2.jpg)"></div>
+                    <div class="home_slider_content_container">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="home_slider_content" data-animation-in="fadeIn"
+                                         data-animation-out="animate-out fadeOut">
+                                        <div class="home_slider_title"><h2>@lang('main.slider_title2')</h2></div>
+                                        <div class="home_slider_subtitle"><h3>@lang('main.slider_desc2')</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slider Item -->
+                {{--      <div class="owl-item home_slider_item">
+                          <div class="home_slider_background" style="background-image:url(images/a3.jpg)"></div>
+                          <div class="home_slider_content_container">
+                              <div class="container">
+                                  <div class="row">
+                                      <div class="col">
+                                          <div class="home_slider_content" data-animation-in="fadeIn"
+                                               data-animation-out="animate-out fadeOut">
+                                              <div class="home_slider_title"><p>@lang('main.slider_desc')</p></div>
+                                              <div class="home_slider_subtitle"><p>@lang('main.slider_desc')</p>
+                                              </div>
+                                              <div class="button button_light home_button"><a href="#">Shop Now</a></div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>--}}
 
             </div>
-        </div>--}}
+
+            <!-- Home Slider Dots -->
+
+            <div class="home_slider_dots_container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="home_slider_dots">
+                                <ul id="home_slider_custom_dots" class="home_slider_custom_dots">
+                                    <li class="home_slider_custom_dot active">01.</li>
+                                    <li class="home_slider_custom_dot">02.</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
     <!-- Products -->
 
@@ -304,6 +426,15 @@
             <div class="row">
                 <div class="col">
                     <div>
+
+                        @if(session()->has('success'))
+                            <p class="alert alert-success mb-2">{{session()->get('success')}}</p>
+                        @endif
+
+                        @if(session()->has('warning'))
+                            <p class="alert alert-warning mb-2">{{session()->get('warning')}}</p>
+                        @endif
+
                         @yield('content')
                     </div>
                 </div>
@@ -414,26 +545,26 @@
             <div class="row">
                 <div class="col">
                     <div class="footer_content d-flex flex-lg-row flex-column align-items-center justify-content-lg-start justify-content-center">
-                        <div class="footer_logo"><a href="#">Apples shop</a></div>
+                        <div class="footer_logo"><a href="{{ route('index') }}">Apples shop</a></div>
+
                         <div class="copyright ml-auto mr-auto">
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;<script>document.write(new Date().getFullYear());</script>
-                            All rights reserved | This template is made with <i class="fa fa-heart-o"
-                                                                                aria-hidden="true"></i> by <a
-                                    href="https://colorlib.com" target="_blank"> Kovalev D.V.</a>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
-                        <div class="footer_social ml-lg-auto">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                            </ul>
+                            <h4>
+                                @lang('main.ip')
+                            </h4>
+                            <script>document.write(new Date().getFullYear());</script>
+                            @lang('main.all_rights')
+
+                        </div>
+                        <div class="copyright ml-auto mr-auto">
+
+                            <h5>@lang('main.kovalev')</h5>
+                            <a
+                                    href="https://www.linkedin.com/in/%D0%B4%D0%BC%D0%B8%D1%82%D1%80%D0%B8%D0%B9-%D0%BA%D0%BE%D0%B2%D0%B0%D0%BB%D1%91%D0%B2-03aa2a241/"
+                                    target="_blank">LinkdIn</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
     </footer>
 </div>
 

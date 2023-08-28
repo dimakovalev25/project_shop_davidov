@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="starter-template">
-        <h3>Approve order:</h3>
-        <h4>enter your details</h4>
+        <h3>@lang('main.approve'):</h3>
+        <h4>@lang('main.details')</h4>
         <div class="">
             <div class="row ">
                 <form action="{{route('order-approve')}}" method="POST">
@@ -11,17 +11,17 @@
                     <div>
                         <div class="">
                             <div class="form-group">
-                                <label for="name" class="control-label col-lg-offset-3 col-lg-2">Name: </label>
+                                <label for="name" class="control-label ">@lang('main.name_user'): </label>
                                 <div class="">
                                     <input type="text" name="name" id="name" value="" class="form-control">
                                 </div>
 
-                                <label for="phone" class="control-label col-lg-offset-3 col-lg-2">Phone: </label>
+                                <label for="phone" class="control-label ">@lang('main.phone'): </label>
                                 <div class="">
                                     <input type="text" name="phone" id="phone" value="" class="form-control">
                                 </div>
 
-                                <label for="email" class="control-label col-lg-offset-3 col-lg-2">Email: </label>
+                                <label for="email" class="control-label ">@lang('main.email'): </label>
                                 <div class="">
                                     <input type="email" name="email" id="email" value="" class="form-control">
                                 </div>
@@ -29,8 +29,8 @@
 
                         </div>
                         <br>
-                        <p>Full price: <b>{{ $order->getFullPrice() }} </b></p>
-                        <input type="submit" class="btn btn-success" value="approve">
+                        <p>@lang('main.full'): <b>{{ $order->getFullPrice() }} {{App\Services\CurrencyConversion::getCurrencySymbol()}}</b></p>
+                        <input type="submit" class="btn btn-success" value=@lang('main.approve')>
                     </div>
                 </form>
             </div>
