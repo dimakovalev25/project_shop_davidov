@@ -118,10 +118,6 @@ class Basket
 {
     protected $order;
 
-    /**
-     * Basket constructor.
-     * @param bool $createOrder
-     */
     public function __construct($createOrder = false)
     {
         $order = session('order');
@@ -140,9 +136,6 @@ class Basket
         }
     }
 
-    /**
-     * @return mixed
-     */
     public function getOrder()
     {
         return $this->order;
@@ -185,7 +178,7 @@ class Basket
         if ($this->order->products->contains($product)) {
             $pivotRow = $this->order->products->where('id', $product->id)->first();
             if ($pivotRow->countInOrder < 2) {
-                $this->order->products->pop($product);
+                $this->order->products->pop($product->id);
             } else {
                 $pivotRow->countInOrder--;
             }
